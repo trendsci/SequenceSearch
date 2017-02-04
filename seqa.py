@@ -375,7 +375,7 @@ def main():
 #          edgecolor='blue',align='center')
   ax1.set_xlim(1,len(seq)+1)
 #  print "<br> almost <br>"
-  plt.savefig("test.%s"%filetype, dpi=dpi_web)
+  plt.savefig("../test.%s"%filetype, dpi=dpi_web)
 #  print "<br><br><br> DONEEE ! <br><br>"
   print "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"/css/svg1.css\"></head>"
   print "Figure shown below.<br>"

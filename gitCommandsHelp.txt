@@ -1,0 +1,7 @@
+Personal file containing some help on git/github commands.
+
+git push origin master
+git commit -m "Added README.md"
+git add .
+git remote -v
+
