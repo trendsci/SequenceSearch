@@ -8,6 +8,7 @@ import cgi
 import sys
 import urllib2
 import re
+import datetime
 #from scipy.interpolate import spline
 
 
@@ -154,19 +155,62 @@ def findRoiDomains(seq,roi,roi_label,domains,n_term_linker = 3):
   #roiperc = float(roi_in_protein)/len(seq_w_roi)
   #print 'Total', roi,':',roi_in_protein,',','%.1f%%' % (roiperc)
 
+
+def commenter(text, comments_file="seqa_comments.txt", 
+              append=True, new_line=True, marker=True):
+  """Allowes one to print out comments or debug information to a file.
+     text = text to be saved in file
+     comments_file = location of file 
+     append = append existing text or start off with new file
+  """
+  if new_line:
+    text += '\n'
+  if marker:
+    text = '-->  ' + text
+  if append:
+    with open(comments_file, "a+") as f:
+      f.write(text)
+  else:
+    with open(comments_file, "w+") as f:
+      f.write(text)
+  return 1 #simply return 1 to indicate all is well
+
+def parse_CGI_param():
+  arguments_web = cgi.FieldStorage()
+  return arguments_web
+
+def seq_parse_uniprot(uniprotID):
+  """Takes uniprotID and returns sequence in 
+     fasta format of first sequence in uniprot entry"""
+  _ = None
+  uniprot_id = uniprotID.strip().replace('\n','').replace('\r','')
+  sequence_web_object = urllib2.urlopen(
+      'http://www.uniprot.org/uniprot/{}.fasta'.format(uniprot_id))
+  fasta_id = sequence_web_object.readline()
+  sequence_web = sequence_web_object.read()
+  sequence_web = sequence_web.upper().strip().replace('\n','').replace('\r','')
+  #sequence_web now contains the fasta 
+  commenter("Uniprot sequence: {}".format(sequence_web))
+  return fasta_id, sequence_web  
+
 def main():
+  """Description to be added here"""
+  commenter("Program started at {}".format(datetime.datetime.utcnow()))
   #save error stream to file
-  sys.stderr = open('error0909.txt', 'w')
+  sys.stderr = open('stderr_seqa_py.txt', 'w')
   #enable python web presentation on dreamhost
   print "Content-type: text/html\n\n"
   
   # define variables
   sequence_file = ""
   
-  arguments_web = cgi.FieldStorage()
+  #read in the POST or GET parameters passed from the HTML GUI
+  #arguments_web = cgi.FieldStorage()
+  arguments_web = parse_CGI_param()
   seq_source = str(arguments_web["seqsource"].value)
   if seq_source == "uniprot":
     uniprot_id = arguments_web["seq"].value.strip().replace('\n','').replace('\r','')
+    seq_parse_uniprot(uniprot_id)
     sequence_web_temp = urllib2.urlopen('http://www.uniprot.org/uniprot/'
                                         +uniprot_id+'.fasta')
     print "<pre>"
@@ -375,7 +419,7 @@ def main():
 #          edgecolor='blue',align='center')
   ax1.set_xlim(1,len(seq)+1)
 #  print "<br> almost <br>"
-  plt.savefig("test.%s"%filetype, dpi=dpi_web)
+  plt.savefig("../test.%s"%filetype, dpi=dpi_web)
 #  print "<br><br><br> DONEEE ! <br><br>"
   print "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"/css/svg1.css\"></head>"
   print "Figure shown below.<br>"
