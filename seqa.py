@@ -252,6 +252,10 @@ def main():
 
   elif seq_source == "user":
     sequence_web = ''.join(arguments_web["seq"].value.upper().split())
+    printp("Sequence from user input")
+    print "Sequence:",
+    printp(seq_printer(sequence_web), new_line=False)
+
 
   dpi_web = int(arguments_web["dpi"].value)
   
@@ -294,21 +298,8 @@ def main():
     except IndexError as e:
       roi_label[letter] = '*'
   # get fasta sequence
-  seq = [sequence_web]#sets seq to a list of one item which is the sequence
-
-
-  # roin = calculateRoi(seq,roi[0])
-#!@  roin = [ calculateRoi(seq,roi1) for roi1 in roi ]
-#  print '<br> ok4 <br>'
-#!@  roiprec = [ '%.1f%%' % (float(roin1)/len(seq)*100) for roin1 in roin ]
-#  print '#======== Residue Composition ========#'
-#!@  roiprec = 'Total residue composition:\n'+str(roi)+' : '+ str(roin)+' :  ' + str(roiprec)
-#  print roiprec
-#  print '<br><br><br> OKKKKKKK <br>'
-  #generate_qplot(seq,roi,sequence_file=sequence_file,
-  #                domains=domains,colors=colors,savefig=True)
-  seq_temp = [a for a in seq[0]]
-  seq = seq_temp
+  seq = [chrctr for chrctr in sequence_web] #split sequence text to a list
+  #the list has one character per list member
 
 ##############################
 #######generate bar plot######
