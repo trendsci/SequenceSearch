@@ -155,11 +155,14 @@ def findRoiDomains(seq,roi,roi_label,domains,n_term_linker = 3):
   #roiperc = float(roi_in_protein)/len(seq_w_roi)
   #print 'Total', roi,':',roi_in_protein,',','%.1f%%' % (roiperc)
 
-def printp(text, pre=True):
+def printp(text, pre=True, new_line=True):
   """Print text surroundd by <pre> ... </pre>"""
   if pre:
     text = "<pre>{}</pre>".format(text)
+  if new_line: 
     print text
+  else:
+    print text,
 
 def commenter(text, comments_file="seqa_comments.txt", 
               append=True, new_line=True, marker=True):
@@ -200,6 +203,27 @@ def seq_parse_uniprot(uniprotID):
   commenter("Uniprot sequence: {}".format(sequence_web))
   return fasta_id, sequence_web  
 
+def seq_printer(text, block_size=10, line_size=40, numbered='left'):
+  f_out = "" # f_out stands for: formatted_output
+  for i in range(1,len(text),block_size):
+    if i == 1:
+      f_out += " %4s "%(str(i))
+    elif (i-1)%line_size == 0: 
+      f_out += "<br> %4s "%(str(i))
+    f_out += text[i:i+block_size] + " "
+
+  return f_out
+
+def unicode_labels():
+  #Unicode symbols to enter in text if needed
+  possible_labels = [unicode(u'\u2588').encode('utf-8'),
+                     unicode(u'\u2592').encode('utf-8'),
+                     unicode(u'\u2591').encode('utf-8'),
+                     unicode(u'\u2663').encode('utf-8'),
+                     unicode(u'\u25B2').encode('utf-8'),
+                     unicode(u'\u2206').encode('utf-8')]
+  return possible_labels
+
 def main():
   """Description to be added here"""
   commenter("Program started at {}".format(datetime.datetime.utcnow()))
@@ -215,25 +239,28 @@ def main():
   #arguments_web = cgi.FieldStorage()
   arguments_web = parse_CGI_param()
   seq_source = str(arguments_web["seqsource"].value)
-  if seq_source == "uniprot":
-    uniprot_id = arguments_web["seq"].value.strip().replace('\n','').replace('\r','')
-    fasta_id, sequence_fasta = seq_parse_uniprot(uniprot_id)
-    sequence_web = sequence_fasta
-    printp("Fasta from uniprot {} <br> {}".format(uniprot_id, fasta_id))
 
-    print "<pre>" 
-    print "Sequence:",
-    for i in range(1,len(sequence_web),10):
-      if i == 1 or (i-1)%40 == 0: print "<br>",'%4s' %(str(i)),
-      print sequence_web[i:i+10],
-    print "</pre>"
+  #check where to get ASCII sequence from (e.g. uniprot or user input)
+  if seq_source == "uniprot":
+    uniprot_id = ''.join(arguments_web["seq"].value.split())
+    #get fasta_id and sequence in fasta format from uniprot
+    fasta_id, sequence_web = seq_parse_uniprot(uniprot_id)
+    printp("Fasta from uniprot {} <br> {}".format(uniprot_id, fasta_id),
+            new_line=False)
+    print "Sequence:", #prints the sequence in nice format
+    printp(seq_printer(sequence_web), new_line=False)
 
   elif seq_source == "user":
-    sequence_web = arguments_web["seq"].value.upper().strip().replace('\n','').replace('\r','')
+    sequence_web = ''.join(arguments_web["seq"].value.upper().split())
+
   dpi_web = int(arguments_web["dpi"].value)
   
   #roi is "Residues Of Interest"
+  #get the search term from user input (e.g. residues or RegEx expression)
   roi_raw = arguments_web["roi"].value.upper()
+
+  #Check what type of search the user is performing (e.g. regular or regex)
+  #format the search term according to search type
   if arguments_web["roitype"].value == "normal":
     roi = set([letter for letter in roi_raw])
   elif arguments_web["roitype"].value == "regex":
@@ -248,11 +275,6 @@ def main():
   filetype = arguments_web["filetype"].value
   colorscheme = arguments_web["colorscheme"].value
 
-  """ Arguments required for the program (either GET or POST):
-  seq = "ATGA" (any alphanumeric letter or number, length 1-inf)
-  roi = "AT" (any alphanumeric, length 1-inf)
-  """
-
   #domains can be redifined from UNIPROT or other databases in the future
   domains = {'1_Q1'  : (-2,100,0),
              '2_KID' : (85,160,1),
@@ -263,34 +285,17 @@ def main():
   n_term_linker = 0 #not in use, for future
   c_term_linker = 0 #not in use, for future
   
-  #Unicode symbols to enter in text if needed
-  possible_labels = [unicode(u'\u2588').encode('utf-8'),
-                     unicode(u'\u2592').encode('utf-8'),
-                     unicode(u'\u2591').encode('utf-8'),
-                     unicode(u'\u2663').encode('utf-8'),
-                     unicode(u'\u25B2').encode('utf-8'),
-                     unicode(u'\u2206').encode('utf-8')]
-  
   #generate dictionary to match roi with UTF8 symbol
   roi_label = {}
   for i, letter in enumerate(roi):
     try:
-      roi_label[letter] = possible_labels[i]
+      pass
+      #roi_label[letter] = possible_labels[i]
     except IndexError as e:
       roi_label[letter] = '*'
   # get fasta sequence
   seq = [sequence_web]#sets seq to a list of one item which is the sequence
 
-  ##Future possible uniprot implementation
-  #if seq[0] == 'uniprot' or seq[0] == 'u':
-  #  uniprot_seq = ['http://www.uniprot.org/uniprot/'+seq[1]+'.fasta']
-  #  print uniprot_seq
-  #  seq = importfasta.importWebFasta(uniprot_seq)[0][1]
-  #else:
-  #  seq = importfasta.importTextFasta(sequence_file)[0][1]
-  #print 'Sequence. \nLength:', len(seq),'bp.','\n',seq
-
-  #seq_w_roi = findRoiDomains(seq,roi,roi_label,domains)
 
   # roin = calculateRoi(seq,roi[0])
 #!@  roin = [ calculateRoi(seq,roi1) for roi1 in roi ]
