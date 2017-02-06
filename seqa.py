@@ -155,6 +155,11 @@ def findRoiDomains(seq,roi,roi_label,domains,n_term_linker = 3):
   #roiperc = float(roi_in_protein)/len(seq_w_roi)
   #print 'Total', roi,':',roi_in_protein,',','%.1f%%' % (roiperc)
 
+def printp(text, pre=True):
+  """Print text surroundd by <pre> ... </pre>"""
+  if pre:
+    text = "<pre>{}</pre>".format(text)
+    print text
 
 def commenter(text, comments_file="seqa_comments.txt", 
               append=True, new_line=True, marker=True):
@@ -181,7 +186,9 @@ def parse_CGI_param():
 
 def seq_parse_uniprot(uniprotID):
   """Takes uniprotID and returns sequence in 
-     fasta format of first sequence in uniprot entry"""
+     fasta format of first sequence in uniprot entry
+     returns fasta_id, sequence_fasta
+  """
   _ = None
   uniprot_id = uniprotID.strip().replace('\n','').replace('\r','')
   sequence_web_object = urllib2.urlopen(
@@ -210,21 +217,17 @@ def main():
   seq_source = str(arguments_web["seqsource"].value)
   if seq_source == "uniprot":
     uniprot_id = arguments_web["seq"].value.strip().replace('\n','').replace('\r','')
-    seq_parse_uniprot(uniprot_id)
-    sequence_web_temp = urllib2.urlopen('http://www.uniprot.org/uniprot/'
-                                        +uniprot_id+'.fasta')
-    print "<pre>"
-    print "Fasta from uniprot", uniprot_id, "<br>",sequence_web_temp.readline(),
-    print "</pre>",
-    sequence_web = sequence_web_temp.read()
-    sequence_web = sequence_web.upper().strip().replace('\n','').replace('\r','')
+    fasta_id, sequence_fasta = seq_parse_uniprot(uniprot_id)
+    sequence_web = sequence_fasta
+    printp("Fasta from uniprot {} <br> {}".format(uniprot_id, fasta_id))
+
     print "<pre>" 
     print "Sequence:",
     for i in range(1,len(sequence_web),10):
       if i == 1 or (i-1)%40 == 0: print "<br>",'%4s' %(str(i)),
       print sequence_web[i:i+10],
-
     print "</pre>"
+
   elif seq_source == "user":
     sequence_web = arguments_web["seq"].value.upper().strip().replace('\n','').replace('\r','')
   dpi_web = int(arguments_web["dpi"].value)
