@@ -238,6 +238,9 @@ def domains_info():
   c_term_linker = 0 #not in use, for future
 
 def main():
+
+  startTime = datetime.datetime.now()
+
   """Description to be added here"""
   commenter("Program started at {}".format(datetime.datetime.utcnow()))
   #save error stream to file
@@ -279,7 +282,7 @@ def main():
 
   #Check what type of search the user is performing (e.g. regular or regex)
   #format the search term according to search type
-  if arguments_web["roitype"].value == "normal":
+  if arguments_web["roitype"].value == "normal" or "quick":
     roi = set([letter for letter in roi_raw])
   elif arguments_web["roitype"].value == "regex":
     roi = roi_raw
@@ -338,7 +341,32 @@ def main():
     print "<br>"
   nt = 1 #set to 1 so sequence starts at 1
   check = 1
+  
+  #updated faster algorithm for "normal" search. >2x faster than
+  # normal_old_slow.
   if arguments_web["roitype"].value == "normal":
+    #make dictionary with ROIs as Keys:
+    print roi
+    roi_dict = dict((term,[]) for term in roi)
+    print roi_dict
+    yheights = [0 for i in xrange(len(seq))]
+    xheights = [i for i in xrange(len(seq))]
+    #y_locations_of_roi_in_seq = [(roi_dict[char].append(pos+1),char) for pos, char in enumerate(seq) if char in roi]
+    for pos, char in enumerate(seq):
+      if char in roi: roi_dict[char].append(pos+1)
+
+    print roi_dict
+    color_num = 0
+    for (a_roi, locations) in (roi_dict.iteritems()):
+      xheights = locations
+      yheights = locations
+      #rects = plt2.bar(xheights, locations)
+      #print yheights, xheights
+      rects = plt2.bar(xheights,yheights,color=colors["standard"][color_num],
+                       alpha=1,width=0.9,linewidth=0,
+                       label=a_roi, gid="ssRectTest")
+      color_num += 1
+  if arguments_web["roitype"].value == "normal_old_slow":
     for n, residue in enumerate(roi):
       for i, aacid in enumerate(seq):
         if aacid == residue:
@@ -440,7 +468,7 @@ def main():
  # print "<object data=\"test.svg\" type=\"image/svg+xml\"></object>"
   print "<body><img src=\"test.%s\" alt=\"test png\" width=\"800\"></body></html>"%filetype
 #  print "Post image"
-
+  print datetime.datetime.now() - startTime
 
 if __name__ == "__main__":
     main()
