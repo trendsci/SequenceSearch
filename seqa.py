@@ -321,10 +321,12 @@ def main():
     print "<mark>RegEx is an experimental feature. Use with caution.</mark><br>"
     resultRegEx = re.finditer(roi, ''.join(seq))
     print "<pre>Sequence:<br>",''.join(seq),"</pre>"
-    print "Found RegEx matches at residues:<br>"
+    print "Found RegEx matches at position(s):<br>"
     regexList = []
+    za = resultRegEx
     for m in resultRegEx:
       regexList.append((int(m.start()+1),int(m.end()+1)))
+      commenter("regex result: {}".format(m.group()))
       print m.start()+1
     print "<br>"
   nt = 1 #set to 1 so sequence starts at 1
