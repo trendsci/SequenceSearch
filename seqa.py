@@ -358,8 +358,11 @@ def main():
             check = 1
           xheights.append(i+nt)
       if colorscheme == "standard":
-        rects = plt2.bar(xheights,yheights,color=colors["standard"][n],alpha=1,width=0.9,
-            linewidth=0,align='edge',label=residue,gid="ssRectTest")
+        rects = plt2.bar(xheights,yheights,
+                         color=colors["standard"][n],
+                         alpha=1,width=0.9,
+                         linewidth=0,align='edge',
+                         label=residue,gid="ssRectTest")
       
       elif colorscheme == "bytype":
         rects = plt2.bar(xheights,yheights,color=colors["bytype"].setdefault(residue,"black"),alpha=1,width=0.9,

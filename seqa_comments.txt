@@ -59,3 +59,8 @@
 -->  Program started at 2017-02-08 01:20:09.609849
 -->  Program started at 2017-02-08 01:20:59.972452
 -->  Program started at 2017-02-08 01:21:05.747132
+-->  Program started at 2017-02-08 01:23:11.772656
+-->  Program started at 2017-02-08 01:23:32.435580
+-->  Program started at 2017-02-08 04:42:05.590122
+-->  regex result: RGG
+-->  regex result: RGR
