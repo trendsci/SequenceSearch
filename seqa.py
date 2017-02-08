@@ -224,6 +224,19 @@ def unicode_labels():
                      unicode(u'\u2206').encode('utf-8')]
   return possible_labels
 
+
+def domains_info():
+  """Update this function to include domain information"""
+  #domains can be redifined from UNIPROT or other databases in the future
+  domains = {'1_Q1'  : (-2,100,0),
+             '2_KID' : (85,160,1),
+             '3_Q2'  : (160,280,1),
+             '4_bZip': (270,341,1),
+             '5_MTSL1': (302,318,0),
+             '6_DNAbinding' :(286,305,0)}
+  n_term_linker = 0 #not in use, for future
+  c_term_linker = 0 #not in use, for future
+
 def main():
   """Description to be added here"""
   commenter("Program started at {}".format(datetime.datetime.utcnow()))
@@ -231,15 +244,18 @@ def main():
   sys.stderr = open('stderr_seqa_py.txt', 'w')
   #enable python web presentation on dreamhost
   print "Content-type: text/html\n\n"
-  
-  # define variables
-  sequence_file = ""
-  
+
   #read in the POST or GET parameters passed from the HTML GUI
   #arguments_web = cgi.FieldStorage()
   arguments_web = parse_CGI_param()
   seq_source = str(arguments_web["seqsource"].value)
 
+  # define variables
+  sequence_file = ""
+  dpi_web = int(arguments_web["dpi"].value)
+  filetype = arguments_web["filetype"].value
+  colorscheme = arguments_web["colorscheme"].value
+ 
   #check where to get ASCII sequence from (e.g. uniprot or user input)
   if seq_source == "uniprot":
     uniprot_id = ''.join(arguments_web["seq"].value.split())
@@ -256,8 +272,6 @@ def main():
     print "Sequence:",
     printp(seq_printer(sequence_web), new_line=False)
 
-
-  dpi_web = int(arguments_web["dpi"].value)
   
   #roi is "Residues Of Interest"
   #get the search term from user input (e.g. residues or RegEx expression)
@@ -275,20 +289,8 @@ def main():
     show_res_label = arguments_web["label"].value
   except:
     show_res_label = 0
-  
-  filetype = arguments_web["filetype"].value
-  colorscheme = arguments_web["colorscheme"].value
 
-  #domains can be redifined from UNIPROT or other databases in the future
-  domains = {'1_Q1'  : (-2,100,0),
-             '2_KID' : (85,160,1),
-             '3_Q2'  : (160,280,1),
-             '4_bZip': (270,341,1),
-             '5_MTSL1': (302,318,0),
-             '6_DNAbinding' :(286,305,0)}
-  n_term_linker = 0 #not in use, for future
-  c_term_linker = 0 #not in use, for future
-  
+  _ = """ don't need this at the moment  
   #generate dictionary to match roi with UTF8 symbol
   roi_label = {}
   for i, letter in enumerate(roi):
@@ -297,9 +299,14 @@ def main():
       #roi_label[letter] = possible_labels[i]
     except IndexError as e:
       roi_label[letter] = '*'
-  # get fasta sequence
-  seq = [chrctr for chrctr in sequence_web] #split sequence text to a list
+   """
+
+  # get fasta sequence.. # no need to split text to list, since it's
+  # already index-able
+  #seq = [chrctr for chrctr in sequence_web] #split sequence text to a list
+  seq = sequence_web
   #the list has one character per list member
+
 
 ##############################
 #######generate bar plot######
