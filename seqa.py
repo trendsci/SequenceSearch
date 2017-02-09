@@ -252,13 +252,23 @@ def main():
   #read in the POST or GET parameters passed from the HTML GUI
   #arguments_web = cgi.FieldStorage()
   arguments_web = parse_CGI_param()
-  seq_source = str(arguments_web["seqsource"].value)
 
   # define variables
+  seq_source = str(arguments_web["seqsource"].value)
   sequence_file = ""
   dpi_web = int(arguments_web["dpi"].value)
   filetype = arguments_web["filetype"].value
   colorscheme = arguments_web["colorscheme"].value
+  
+  #roi is "Residues Of Interest"
+  #get the search term from user input (e.g. residues or RegEx expression)
+  roi_raw = arguments_web["roi"].value.upper()
+
+  #disaply amino acid type for each residue?
+  try:
+    show_res_label = arguments_web["label"].value
+  except:
+    show_res_label = 0
  
   #check where to get ASCII sequence from (e.g. uniprot or user input)
   if seq_source == "uniprot":
@@ -277,23 +287,15 @@ def main():
     print "Sequence:",
     printp(seq_printer(sequence_web), new_line=False)
 
-  
-  #roi is "Residues Of Interest"
-  #get the search term from user input (e.g. residues or RegEx expression)
-  roi_raw = arguments_web["roi"].value.upper()
+
 
   #Check what type of search the user is performing (e.g. regular or regex)
   #format the search term according to search type
-  if arguments_web["roitype"].value == "normal" or "quick":
+  if arguments_web["roitype"].value == "normal" or "normal_old_slow":
     roi = set([letter for letter in roi_raw])
   elif arguments_web["roitype"].value == "regex":
     roi = roi_raw
 
-  #disaply amino acid type for each residue?
-  try:
-    show_res_label = arguments_web["label"].value
-  except:
-    show_res_label = 0
 
   _ = """ don't need this at the moment  
   #generate dictionary to match roi with UTF8 symbol

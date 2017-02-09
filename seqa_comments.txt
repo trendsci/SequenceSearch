@@ -149,3 +149,16 @@
 -->  roi_dict that was generated: {'A': [], 'G': []}
 -->  Program started at 2017-02-09 04:14:24.269494
 -->  roi_dict that was generated: {'A': [], 'G': []}
+-->  Program started at 2017-02-09 04:27:25.695492
+-->  roi_dict that was generated: {'AG': []}
+-->  Program started at 2017-02-09 04:28:04.588827
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  Program started at 2017-02-09 04:37:58.006311
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  Program started at 2017-02-09 04:38:07.263254
+-->  Program started at 2017-02-09 04:38:07.543042
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  Program started at 2017-02-09 04:38:15.058205
+-->  Uniprot sequence: MTMESGAENQQSGDAAVTEAENQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
+-->  Program started at 2017-02-09 04:46:20.588461
+-->  roi_dict that was generated: {'A': [], 'G': []}
