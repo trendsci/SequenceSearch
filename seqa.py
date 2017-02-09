@@ -196,6 +196,7 @@ def seq_parse_uniprot(uniprotID):
   uniprot_id = uniprotID.strip().replace('\n','').replace('\r','')
   sequence_web_object = urllib2.urlopen(
       'http://www.uniprot.org/uniprot/{}.fasta'.format(uniprot_id))
+  print "UNIPROT PARSE {}".format(uniprot_id)
   fasta_id = sequence_web_object.readline()
   sequence_web = sequence_web_object.read()
   sequence_web = sequence_web.upper().strip().replace('\n','').replace('\r','')
@@ -238,7 +239,7 @@ def domains_info():
   c_term_linker = 0 #not in use, for future
 
 def main():
-
+  #time this program, set start time.
   startTime = datetime.datetime.now()
 
   """Description to be added here"""
@@ -261,6 +262,7 @@ def main():
  
   #check where to get ASCII sequence from (e.g. uniprot or user input)
   if seq_source == "uniprot":
+    print "I this I'm getting uniprot ID"
     uniprot_id = ''.join(arguments_web["seq"].value.split())
     #get fasta_id and sequence in fasta format from uniprot
     fasta_id, sequence_web = seq_parse_uniprot(uniprot_id)
@@ -348,9 +350,9 @@ def main():
     #make dictionary with ROIs as Keys:
     print roi
     roi_dict = dict((term,[]) for term in roi)
-    print roi_dict
-    yheights = [0 for i in xrange(len(seq))]
-    xheights = [i for i in xrange(len(seq))]
+    commenter("roi_dict that was generated: {}".format(roi_dict))
+    #yheights = [0 for i in xrange(len(seq))]
+    #xheights = [i for i in xrange(len(seq))]
     #y_locations_of_roi_in_seq = [(roi_dict[char].append(pos+1),char) for pos, char in enumerate(seq) if char in roi]
     for pos, char in enumerate(seq):
       if char in roi: roi_dict[char].append(pos+1)
@@ -360,8 +362,6 @@ def main():
     for (a_roi, locations) in (roi_dict.iteritems()):
       xheights = locations
       yheights = locations
-      #rects = plt2.bar(xheights, locations)
-      #print yheights, xheights
       rects = plt2.bar(xheights,yheights,color=colors["standard"][color_num],
                        alpha=1,width=0.9,linewidth=0,
                        label=a_roi, gid="ssRectTest")
