@@ -196,7 +196,6 @@ def seq_parse_uniprot(uniprotID):
   uniprot_id = uniprotID.strip().replace('\n','').replace('\r','')
   sequence_web_object = urllib2.urlopen(
       'http://www.uniprot.org/uniprot/{}.fasta'.format(uniprot_id))
-  print "UNIPROT PARSE {}".format(uniprot_id)
   fasta_id = sequence_web_object.readline()
   sequence_web = sequence_web_object.read()
   sequence_web = sequence_web.upper().strip().replace('\n','').replace('\r','')
@@ -272,7 +271,6 @@ def main():
  
   #check where to get ASCII sequence from (e.g. uniprot or user input)
   if seq_source == "uniprot":
-    print "I this I'm getting uniprot ID"
     uniprot_id = ''.join(arguments_web["seq"].value.split())
     #get fasta_id and sequence in fasta format from uniprot
     fasta_id, sequence_web = seq_parse_uniprot(uniprot_id)
@@ -345,8 +343,8 @@ def main():
     #y_locations_of_roi_in_seq = [(roi_dict[char].append(pos+1),char) for pos, char in enumerate(seq) if char in roi]
     for pos, char in enumerate(seq):
       if char in roi: roi_dict[char].append(pos+1)
-    print "<br>{}<br>".format(datetime.datetime.now() - startTime)
-    print roi_dict
+    print "<br>Time before drawing figure: {}<br>".format(datetime.datetime.now() - startTime)
+    commenter("roi_dict: {}".format(roi_dict))
     color_num = 0 #used as counter to enumerate different color to each set of bars
     for (a_roi, locations) in (roi_dict.iteritems()):
       xheights = locations
@@ -420,12 +418,13 @@ def main():
     right='off',         # ticks along the top edge are off
     labelleft='off') # labels along the bottom edge are off
   if len(seq) > 60:
-    plt.xticks(np.arange(0,351,20))
+    plt.xticks(np.arange(0,len(seq),round(len(seq)/15,-1)))
   ax1 = plt.subplot(111)
   ax = fig.gca()
  # ax = plt.gca()
   #for x,y in ((2.5,rects[0].get_y()),(4.5,-0.2)):
   #a1 = rects[0].get_y()
+  #used for residue labels
   a1 = 0
   a2 = range(1,len(seq)+1,1)
   a3 = []
