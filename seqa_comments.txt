@@ -162,3 +162,24 @@
 -->  Uniprot sequence: MTMESGAENQQSGDAAVTEAENQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
 -->  Program started at 2017-02-09 04:46:20.588461
 -->  roi_dict that was generated: {'A': [], 'G': []}
+-->  Program started at 2017-02-09 04:54:05.059326
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  Program started at 2017-02-09 04:54:45.469053
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  Program started at 2017-02-09 04:56:36.286360
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  Program started at 2017-02-09 04:59:54.779507
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  Program started at 2017-02-09 05:00:24.968614
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  Program started at 2017-02-09 05:00:39.800580
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  Program started at 2017-02-09 05:04:16.328843
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}

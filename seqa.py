@@ -297,17 +297,6 @@ def main():
     roi = roi_raw
 
 
-  _ = """ don't need this at the moment  
-  #generate dictionary to match roi with UTF8 symbol
-  roi_label = {}
-  for i, letter in enumerate(roi):
-    try:
-      pass
-      #roi_label[letter] = possible_labels[i]
-    except IndexError as e:
-      roi_label[letter] = '*'
-   """
-
   # get fasta sequence.. # no need to split text to list, since it's
   # already index-able
   #seq = [chrctr for chrctr in sequence_web] #split sequence text to a list
@@ -350,24 +339,25 @@ def main():
   # normal_old_slow.
   if arguments_web["roitype"].value == "normal":
     #make dictionary with ROIs as Keys:
-    print roi
+    commenter("ROI (search terms): {}".format(roi))
     roi_dict = dict((term,[]) for term in roi)
     commenter("roi_dict that was generated: {}".format(roi_dict))
-    #yheights = [0 for i in xrange(len(seq))]
-    #xheights = [i for i in xrange(len(seq))]
     #y_locations_of_roi_in_seq = [(roi_dict[char].append(pos+1),char) for pos, char in enumerate(seq) if char in roi]
     for pos, char in enumerate(seq):
       if char in roi: roi_dict[char].append(pos+1)
-
+    print "<br>{}<br>".format(datetime.datetime.now() - startTime)
     print roi_dict
-    color_num = 0
+    color_num = 0 #used as counter to enumerate different color to each set of bars
     for (a_roi, locations) in (roi_dict.iteritems()):
       xheights = locations
-      yheights = locations
+      y_height = 1 #can set this variable somewhere outside of this function
+      #so it can be used by others
+      yheights = [y_height for a in locations]
       rects = plt2.bar(xheights,yheights,color=colors["standard"][color_num],
                        alpha=1,width=0.9,linewidth=0,
                        label=a_roi, gid="ssRectTest")
       color_num += 1
+
   if arguments_web["roitype"].value == "normal_old_slow":
     for n, residue in enumerate(roi):
       for i, aacid in enumerate(seq):
