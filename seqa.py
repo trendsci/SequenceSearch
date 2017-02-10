@@ -289,7 +289,7 @@ def main():
 
   #Check what type of search the user is performing (e.g. regular or regex)
   #format the search term according to search type
-  if arguments_web["roitype"].value == "normal" or "normal_old_slow":
+  if arguments_web["roitype"].value == "normal":
     roi = set([letter for letter in roi_raw])
   elif arguments_web["roitype"].value == "regex":
     roi = roi_raw
@@ -299,8 +299,7 @@ def main():
   # already index-able
   #seq = [chrctr for chrctr in sequence_web] #split sequence text to a list
   seq = sequence_web
-  #the list has one character per list member
-
+  #print "seq=",seq,"<br><br>ROI=",roi
 
 ##############################
 #######generate bar plot######
@@ -320,8 +319,10 @@ def main():
   xheights = []
   if arguments_web["roitype"].value == "regex":
     print "<mark>RegEx is an experimental feature. Use with caution.</mark><br>"
-    resultRegEx = re.finditer(roi, ''.join(seq))
-    print "<pre>Sequence:<br>",''.join(seq),"</pre>"
+    #resultRegEx = re.finditer(roi, ''.join(seq))
+
+    resultRegEx = re.finditer(roi, (seq))
+#    print "<pre>Sequence:<br>",''.join(seq),"</pre>"
     print "Found RegEx matches at position(s):<br>"
     regexList = []
     za = resultRegEx
@@ -451,7 +452,20 @@ def main():
 #  print "<br> almost <br>"
   plt.savefig("../test.%s"%filetype, dpi=dpi_web)
 #  print "<br><br><br> DONEEE ! <br><br>"
-  print "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"/css/svg1.css\"></head>"
+  javascript_1 = """
+  <script type="text/javascript">
+    var mytextbox = document.getElementById('mytext');
+    var mydropdown = document.getElementById('dropdown');
+
+    mydropdown.onchange = function(){
+          mytextbox.value = mytextbox.value  + this.value; //to appened
+         //mytextbox.innerHTML = this.value;
+    }
+  </script>
+  """  
+
+
+  print "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"/css/svg1.css\">{jscript_1}</head>".format(jscript_1=javascript_1)
   print "Figure shown below.<br>"
   print "Number of residues: ",len(seq),"<br>"
   print "<a href=\"test.%s\">Click here to view full size image</a>"%filetype
