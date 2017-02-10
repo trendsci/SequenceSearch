@@ -335,7 +335,7 @@ def main():
     for m in resultRegEx:
       regexList.append((int(m.start()+1),int(m.end()+1)))
       commenter("regex result: {}".format(m.group()))
-      print m.start()+1
+      print "Residues> {} - {}.<br>".format(m.start()+1,m.end())
     print "<br>"
   nt = 1 #set to 1 so sequence starts at 1
   check = 1
