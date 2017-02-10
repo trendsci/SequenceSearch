@@ -410,10 +410,10 @@ def main():
   plt.legend(loc='center left', bbox_to_anchor=(1.01,0.5), fontsize=10)
 
   #plot gray divide lines
-  for item in np.arange(1,len(seq)+1,1): 
-    plt.axvline(item,color='gray',
-                linewidth=0.2,linestyle='-',alpha=0.5)  
-
+  #for item in np.arange(1,len(seq)+1,1): 
+  #  plt.axvline(item,color='gray',
+  #              linewidth=0.2,linestyle='-',alpha=0.5)  
+  
 
   plt.subplots_adjust(top=0.8,left=0.1,right=0.9,bottom=0.25)
 
@@ -428,6 +428,7 @@ def main():
     plt.xticks(np.arange(0,len(seq),round(len(seq)/15,-1)))
   ax1 = plt.subplot(111)
   ax = fig.gca()
+  ax.set_axis_bgcolor('#f7f7f7')
  # ax = plt.gca()
   #for x,y in ((2.5,rects[0].get_y()),(4.5,-0.2)):
   #a1 = rects[0].get_y()
@@ -479,6 +480,7 @@ def main():
  # print "<object data=\"test.svg\" type=\"image/svg+xml\"></object>"
   print "<body><img src=\"test.%s\" alt=\"test png\" width=\"800\"></body></html>"%filetype
 #  print "Post image"
+  print "<br>"
   print datetime.datetime.now() - startTime
 
 if __name__ == "__main__":

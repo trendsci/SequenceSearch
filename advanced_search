@@ -1,5 +1,5 @@
 Name              Search term              Description
-LeucineZipper    ((L......)(?=(L)){2,}){2,}  Leucine Zipper
+LeucineZipper    ((L......)(?=(L)){2,}){2,}(L)  Leucine Zipper
 LeucineZipperOld    (L......)(?=(L)){2,}     Protein dimerization motif
 WalkerPLoop)   [AG]....GK[ST]           ATP or GTP binding motif
 SH3Domain       .PP.P                    Need to double check this
