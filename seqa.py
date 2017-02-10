@@ -205,11 +205,12 @@ def seq_parse_uniprot(uniprotID):
 
 def seq_printer(text, block_size=10, line_size=40, numbered='left'):
   f_out = "" # f_out stands for: formatted_output
-  for i in range(1,len(text),block_size):
-    if i == 1:
-      f_out += " %4s "%(str(i))
-    elif (i-1)%line_size == 0: 
-      f_out += "<br> %4s "%(str(i))
+  for i in range(0,len(text),block_size):
+    ij = i + 1
+    if ij == 1:
+      f_out += " %4s "%(str(ij))
+    elif (ij-1)%line_size == 0: 
+      f_out += "<br> %4s "%(str(ij))
     f_out += text[i:i+block_size] + " "
 
   return f_out
@@ -282,8 +283,7 @@ def main():
   elif seq_source == "user":
     sequence_web = ''.join(arguments_web["seq"].value.upper().split())
     printp("Sequence from user input")
-    print "Sequence:",
-    printp(seq_printer(sequence_web), new_line=False)
+    printp("Sequence: <br>{}".format(seq_printer(sequence_web)), new_line=False)
 
 
 
@@ -293,7 +293,12 @@ def main():
     roi = set([letter for letter in roi_raw])
   elif arguments_web["roitype"].value == "regex":
     roi = roi_raw
-
+    roi_user_print = roi_raw
+    with open("advanced_search","r") as f:
+      for line in f:
+        if roi == line.split()[0].upper(): 
+          roi = line.split()[1].upper()
+          break
 
   # get fasta sequence.. # no need to split text to list, since it's
   # already index-able
@@ -318,12 +323,13 @@ def main():
   yheights = []
   xheights = []
   if arguments_web["roitype"].value == "regex":
-    print "<mark>RegEx is an experimental feature. Use with caution.</mark><br>"
+    commenter("Advanced search (regex) query: {}".format(roi))
+    #print "This is an experimental feature. Use with caution.<br><br>"
     #resultRegEx = re.finditer(roi, ''.join(seq))
 
     resultRegEx = re.finditer(roi, (seq))
 #    print "<pre>Sequence:<br>",''.join(seq),"</pre>"
-    print "Found RegEx matches at position(s):<br>"
+    print "Found matches at position(s):<br>"
     regexList = []
     za = resultRegEx
     for m in resultRegEx:
@@ -390,7 +396,7 @@ def main():
       xheights = []
       yheights = []
   elif arguments_web["roitype"].value == "regex":
-    print "generating regex figure"
+    commenter("generating regex figure")
     
     regexListX = [x for x,xf in regexList]
     regexListX = []
@@ -443,7 +449,7 @@ def main():
     plt.title("Location of amino acids: %s." 
              % ', '.join(roi))
   elif arguments_web["roitype"].value == "regex":
-    plt.title("Location of RegEx: %s" % roi)
+    plt.title("Location of: %s" % roi_user_print)
   plt.xlabel("Residue number")
 #  plt.ylabel("AA present")
 #  plt2.bar(xheights,yheights,color='blue',alpha=1,#width=0.05,
@@ -466,7 +472,7 @@ def main():
 
 
   print "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"/css/svg1.css\">{jscript_1}</head>".format(jscript_1=javascript_1)
-  print "Figure shown below.<br>"
+  print "<br>"
   print "Number of residues: ",len(seq),"<br>"
   print "<a href=\"test.%s\">Click here to view full size image</a>"%filetype
   print "<br>"

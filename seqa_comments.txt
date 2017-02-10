@@ -322,3 +322,144 @@
 -->  ROI (search terms): set(['K', 'R'])
 -->  roi_dict that was generated: {'K': [], 'R': []}
 -->  roi_dict: {'K': [91, 94, 123, 136, 155, 285, 292, 303, 304, 305, 309, 323, 330, 333, 339], 'R': [95, 124, 125, 130, 131, 135, 150, 255, 284, 286, 289, 294, 298, 301, 302, 314]}
+-->  Program started at 2017-02-10 03:07:17.801168
+-->  ROI (search terms): set(['A', '[', ']', 'G'])
+-->  roi_dict that was generated: {'A': [], '[': [], ']': [], 'G': []}
+-->  roi_dict: {'A': [1, 9], '[': [], ']': [], 'G': [2, 3, 7, 8]}
+-->  Program started at 2017-02-10 03:07:53.592362
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  roi_dict: {'A': [1, 9], 'G': [2, 3, 7, 8]}
+-->  Program started at 2017-02-10 03:08:42.078771
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  roi_dict: {'A': [1, 9], 'G': [2, 3, 7, 8]}
+-->  Program started at 2017-02-10 03:09:12.517708
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  roi_dict: {'A': [1, 9], 'G': [2, 3, 7, 8]}
+-->  Program started at 2017-02-10 03:10:35.870455
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  roi_dict: {'A': [1, 9], 'G': [2, 3, 7, 8]}
+-->  Program started at 2017-02-10 03:10:52.682114
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  roi_dict: {'A': [1, 9], 'G': [2, 3, 7, 8]}
+-->  Program started at 2017-02-10 03:11:10.674938
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  roi_dict: {'A': [1, 9], 'G': [2, 3, 7, 8, 16]}
+-->  Program started at 2017-02-10 03:11:44.348253
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  roi_dict: {'A': [1, 9, 11, 19, 21, 29, 31, 39, 41, 49, 51, 59, 61, 69, 71, 79], 'G': [2, 3, 7, 8, 12, 13, 17, 18, 22, 23, 27, 28, 32, 33, 37, 38, 42, 43, 47, 48, 52, 53, 57, 58, 62, 63, 67, 68, 72, 73, 77, 78]}
+-->  Program started at 2017-02-10 03:12:06.683610
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  roi_dict: {'A': [1, 9, 11, 19, 21, 29, 31, 39, 41, 49, 51, 59, 61, 69, 71, 79], 'G': [2, 3, 7, 8, 12, 13, 17, 18, 22, 23, 27, 28, 32, 33, 37, 38, 42, 43, 47, 48, 52, 53, 57, 58, 62, 63, 67, 68, 72, 73, 77, 78]}
+-->  Program started at 2017-02-10 03:13:14.928142
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  roi_dict: {'A': [1, 9, 11, 19, 21, 29, 31, 39, 41, 49, 51, 59, 61, 69, 71, 79], 'G': [2, 3, 7, 8, 12, 13, 17, 18, 22, 23, 27, 28, 32, 33, 37, 38, 42, 43, 47, 48, 52, 53, 57, 58, 62, 63, 67, 68, 72, 73, 77, 78]}
+-->  Program started at 2017-02-10 03:14:04.266232
+-->  ROI (search terms): set(['A', 'G'])
+-->  roi_dict that was generated: {'A': [], 'G': []}
+-->  roi_dict: {'A': [1, 9, 11, 19, 21, 29, 31, 39, 41, 49, 51, 59, 61, 69, 71, 79], 'G': [2, 3, 7, 8, 12, 13, 17, 18, 22, 23, 27, 28, 32, 33, 37, 38, 42, 43, 47, 48, 52, 53, 57, 58, 62, 63, 67, 68, 72, 73, 77, 78]}
+-->  Program started at 2017-02-10 03:14:28.530951
+-->  regex result: AG
+-->  regex result: GG
+-->  regex result: AG
+-->  regex result: GG
+-->  regex result: AG
+-->  regex result: GG
+-->  regex result: AG
+-->  regex result: GG
+-->  regex result: AG
+-->  regex result: GG
+-->  regex result: AG
+-->  regex result: GG
+-->  regex result: AG
+-->  regex result: GG
+-->  regex result: AG
+-->  regex result: GG
+-->  Program started at 2017-02-10 03:15:10.137966
+-->  regex result: GGM
+-->  Program started at 2017-02-10 03:16:07.907424
+-->  regex result: GAD
+-->  regex result: GAF
+-->  regex result: GGM
+-->  Program started at 2017-02-10 03:41:37.665735
+-->  Program started at 2017-02-10 03:42:18.841864
+-->  regex result: FF
+-->  Program started at 2017-02-10 03:44:43.692185
+-->  Program started at 2017-02-10 03:45:23.607394
+-->  Program started at 2017-02-10 03:48:02.462590
+-->  Program started at 2017-02-10 03:48:43.154323
+-->  Program started at 2017-02-10 03:49:06.630648
+-->  Program started at 2017-02-10 03:49:40.910211
+-->  Program started at 2017-02-10 03:50:24.226305
+-->  regex result: L123456
+-->  regex result: L123456
+-->  regex result: L123456
+-->  Program started at 2017-02-10 03:51:01.625655
+-->  regex result: L123456
+-->  regex result: L123456
+-->  regex result: L123456
+-->  Program started at 2017-02-10 03:52:32.830056
+-->  regex result: L123456
+-->  regex result: L123456
+-->  regex result: L123456
+-->  Program started at 2017-02-10 03:53:43.566727
+-->  Advanced search (regex) query: (L......)(?=(L)){2,}
+-->  regex result: L123456
+-->  regex result: L123456
+-->  regex result: L123456
+-->  Program started at 2017-02-10 03:54:06.137739
+-->  Advanced search (regex) query: (L......)(?=(L)){2,}
+-->  regex result: L123456
+-->  regex result: L123456
+-->  regex result: L123456
+-->  Program started at 2017-02-10 03:54:30.852000
+-->  Advanced search (regex) query: (L......)(?=(L)){2,}
+-->  regex result: L123456
+-->  regex result: L123456
+-->  regex result: L123456
+-->  Program started at 2017-02-10 03:55:16.332324
+-->  Advanced search (regex) query: (L......)(?=(L)){2,}
+-->  regex result: L123456
+-->  regex result: L123456
+-->  regex result: L123456
+-->  Program started at 2017-02-10 03:55:47.408275
+-->  Advanced search (regex) query: (L......)(?=(L)){2,}
+-->  regex result: L123456
+-->  regex result: L123456
+-->  regex result: L123456
+-->  Program started at 2017-02-10 03:56:39.768477
+-->  Uniprot sequence: MTMESGAENQQSGDAAVTEAENQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
+-->  Advanced search (regex) query: (L......)(?=(L)){2,}
+-->  regex result: LENRVAV
+-->  regex result: LENQNKT
+-->  regex result: LIEELKA
+-->  Program started at 2017-02-10 04:04:05.324846
+-->  Uniprot sequence: MTMESGAENQQSGDAAVTEAENQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
+-->  Advanced search (regex) query: (L......)(?=(L)){2,}
+-->  regex result: LENRVAV
+-->  regex result: LENQNKT
+-->  regex result: LIEELKA
+-->  generating regex figure
+-->  Program started at 2017-02-10 04:04:36.577971
+-->  Uniprot sequence: MTMESGAENQQSGDAAVTEAENQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
+-->  Advanced search (regex) query: (L......)(?=(L)){2,}
+-->  regex result: LENRVAV
+-->  regex result: LENQNKT
+-->  regex result: LIEELKA
+-->  generating regex figure
+-->  Program started at 2017-02-10 04:05:16.690486
+-->  Uniprot sequence: MVNFVSAGLFRCLPVSCPEDLLVEELVDGLLSLEEELKDKEEEEAVLDGLLSLEEESRGRLRRGPPGEKAPPRGETHRDRQRRAEEKRKRKKEREKEEEKQTAEYLKRKEEEKARRRRRAEKKAADVARRKQEEQERRERKWRQGAEKAKQHSARKEKMQELGIDGYTRQLEGEVESLEAERRKLLQEKEDLMGEVNYWQGRLEAMWLQ
+-->  Advanced search (regex) query: (L......)(?=(L)){2,}
+-->  regex result: LVDGLLS
+-->  regex result: LEGEVES
+-->  regex result: LEAERRK
+-->  regex result: LLQEKED
+-->  generating regex figure
