@@ -155,6 +155,14 @@ def findRoiDomains(seq,roi,roi_label,domains,n_term_linker = 3):
   #roiperc = float(roi_in_protein)/len(seq_w_roi)
   #print 'Total', roi,':',roi_in_protein,',','%.1f%%' % (roiperc)
 
+def printp(text, pre=True, new_line=True):
+  """Print text surroundd by <pre> ... </pre>"""
+  if pre:
+    text = "<pre>{}</pre>".format(text)
+  if new_line: 
+    print text
+  else:
+    print text,
 
 def commenter(text, comments_file="seqa_comments.txt", 
               append=True, new_line=True, marker=True):
@@ -181,7 +189,9 @@ def parse_CGI_param():
 
 def seq_parse_uniprot(uniprotID):
   """Takes uniprotID and returns sequence in 
-     fasta format of first sequence in uniprot entry"""
+     fasta format of first sequence in uniprot entry
+     returns fasta_id, sequence_fasta
+  """
   _ = None
   uniprot_id = uniprotID.strip().replace('\n','').replace('\r','')
   sequence_web_object = urllib2.urlopen(
@@ -193,63 +203,31 @@ def seq_parse_uniprot(uniprotID):
   commenter("Uniprot sequence: {}".format(sequence_web))
   return fasta_id, sequence_web  
 
-def main():
-  """Description to be added here"""
-  commenter("Program started at {}".format(datetime.datetime.utcnow()))
-  #save error stream to file
-  sys.stderr = open('stderr_seqa_py.txt', 'w')
-  #enable python web presentation on dreamhost
-  print "Content-type: text/html\n\n"
-  
-  # define variables
-  sequence_file = ""
-  
-  #read in the POST or GET parameters passed from the HTML GUI
-  #arguments_web = cgi.FieldStorage()
-  arguments_web = parse_CGI_param()
-  seq_source = str(arguments_web["seqsource"].value)
-  if seq_source == "uniprot":
-    uniprot_id = arguments_web["seq"].value.strip().replace('\n','').replace('\r','')
-    seq_parse_uniprot(uniprot_id)
-    sequence_web_temp = urllib2.urlopen('http://www.uniprot.org/uniprot/'
-                                        +uniprot_id+'.fasta')
-    print "<pre>"
-    print "Fasta from uniprot", uniprot_id, "<br>",sequence_web_temp.readline(),
-    print "</pre>",
-    sequence_web = sequence_web_temp.read()
-    sequence_web = sequence_web.upper().strip().replace('\n','').replace('\r','')
-    print "<pre>" 
-    print "Sequence:",
-    for i in range(1,len(sequence_web),10):
-      if i == 1 or (i-1)%40 == 0: print "<br>",'%4s' %(str(i)),
-      print sequence_web[i:i+10],
+def seq_printer(text, block_size=10, line_size=40, numbered='left'):
+  f_out = "" # f_out stands for: formatted_output
+  for i in range(0,len(text),block_size):
+    ij = i + 1
+    if ij == 1:
+      f_out += " %4s "%(str(ij))
+    elif (ij-1)%line_size == 0: 
+      f_out += "<br> %4s "%(str(ij))
+    f_out += text[i:i+block_size] + " "
 
-    print "</pre>"
-  elif seq_source == "user":
-    sequence_web = arguments_web["seq"].value.upper().strip().replace('\n','').replace('\r','')
-  dpi_web = int(arguments_web["dpi"].value)
-  
-  #roi is "Residues Of Interest"
-  roi_raw = arguments_web["roi"].value.upper()
-  if arguments_web["roitype"].value == "normal":
-    roi = set([letter for letter in roi_raw])
-  elif arguments_web["roitype"].value == "regex":
-    roi = roi_raw
+  return f_out
 
-  #disaply amino acid type for each residue?
-  try:
-    show_res_label = arguments_web["label"].value
-  except:
-    show_res_label = 0
-  
-  filetype = arguments_web["filetype"].value
-  colorscheme = arguments_web["colorscheme"].value
+def unicode_labels():
+  #Unicode symbols to enter in text if needed
+  possible_labels = [unicode(u'\u2588').encode('utf-8'),
+                     unicode(u'\u2592').encode('utf-8'),
+                     unicode(u'\u2591').encode('utf-8'),
+                     unicode(u'\u2663').encode('utf-8'),
+                     unicode(u'\u25B2').encode('utf-8'),
+                     unicode(u'\u2206').encode('utf-8')]
+  return possible_labels
 
-  """ Arguments required for the program (either GET or POST):
-  seq = "ATGA" (any alphanumeric letter or number, length 1-inf)
-  roi = "AT" (any alphanumeric, length 1-inf)
-  """
 
+def domains_info():
+  """Update this function to include domain information"""
   #domains can be redifined from UNIPROT or other databases in the future
   domains = {'1_Q1'  : (-2,100,0),
              '2_KID' : (85,160,1),
@@ -259,78 +237,139 @@ def main():
              '6_DNAbinding' :(286,305,0)}
   n_term_linker = 0 #not in use, for future
   c_term_linker = 0 #not in use, for future
+
+def main():
+  #time this program, set start time.
+  startTime = datetime.datetime.now()
+
+  """Description to be added here"""
+  commenter("Program started at {}".format(datetime.datetime.utcnow()))
+  #save error stream to file
+  sys.stderr = open('stderr_seqa_py.txt', 'w')
+  #enable python web presentation on dreamhost
+  print "Content-type: text/html\n\n"
+
+  #read in the POST or GET parameters passed from the HTML GUI
+  #arguments_web = cgi.FieldStorage()
+  arguments_web = parse_CGI_param()
+
+  # define variables
+  seq_source = str(arguments_web["seqsource"].value)
+  sequence_file = ""
+  dpi_web = int(arguments_web["dpi"].value)
+  filetype = arguments_web["filetype"].value
+  colorscheme = arguments_web["colorscheme"].value
   
-  #Unicode symbols to enter in text if needed
-  possible_labels = [unicode(u'\u2588').encode('utf-8'),
-                     unicode(u'\u2592').encode('utf-8'),
-                     unicode(u'\u2591').encode('utf-8'),
-                     unicode(u'\u2663').encode('utf-8'),
-                     unicode(u'\u25B2').encode('utf-8'),
-                     unicode(u'\u2206').encode('utf-8')]
-  
-  #generate dictionary to match roi with UTF8 symbol
-  roi_label = {}
-  for i, letter in enumerate(roi):
-    try:
-      roi_label[letter] = possible_labels[i]
-    except IndexError as e:
-      roi_label[letter] = '*'
-  # get fasta sequence
-  seq = [sequence_web]#sets seq to a list of one item which is the sequence
+  #roi is "Residues Of Interest"
+  #get the search term from user input (e.g. residues or RegEx expression)
+  roi_raw = arguments_web["roi"].value.upper()
 
-  ##Future possible uniprot implementation
-  #if seq[0] == 'uniprot' or seq[0] == 'u':
-  #  uniprot_seq = ['http://www.uniprot.org/uniprot/'+seq[1]+'.fasta']
-  #  print uniprot_seq
-  #  seq = importfasta.importWebFasta(uniprot_seq)[0][1]
-  #else:
-  #  seq = importfasta.importTextFasta(sequence_file)[0][1]
-  #print 'Sequence. \nLength:', len(seq),'bp.','\n',seq
+  #disaply amino acid type for each residue?
+  try:
+    show_res_label = arguments_web["label"].value
+  except:
+    show_res_label = 0
+ 
+  #check where to get ASCII sequence from (e.g. uniprot or user input)
+  if seq_source == "uniprot":
+    uniprot_id = ''.join(arguments_web["seq"].value.split())
+    #get fasta_id and sequence in fasta format from uniprot
+    fasta_id, sequence_web = seq_parse_uniprot(uniprot_id)
+    printp("Fasta from uniprot {} <br> {}".format(uniprot_id, fasta_id),
+            new_line=False)
+    printp("Sequence:<br>{}".format(seq_printer(sequence_web)), new_line=False)
 
-  #seq_w_roi = findRoiDomains(seq,roi,roi_label,domains)
+  elif seq_source == "user":
+    sequence_web = ''.join(arguments_web["seq"].value.upper().split())
+    printp("Sequence from user input")
+    printp("Sequence: <br>{}".format(seq_printer(sequence_web)), new_line=False)
 
-  # roin = calculateRoi(seq,roi[0])
-#!@  roin = [ calculateRoi(seq,roi1) for roi1 in roi ]
-#  print '<br> ok4 <br>'
-#!@  roiprec = [ '%.1f%%' % (float(roin1)/len(seq)*100) for roin1 in roin ]
-#  print '#======== Residue Composition ========#'
-#!@  roiprec = 'Total residue composition:\n'+str(roi)+' : '+ str(roin)+' :  ' + str(roiprec)
-#  print roiprec
-#  print '<br><br><br> OKKKKKKK <br>'
-  #generate_qplot(seq,roi,sequence_file=sequence_file,
-  #                domains=domains,colors=colors,savefig=True)
-  seq_temp = [a for a in seq[0]]
-  seq = seq_temp
+
+
+  #Check what type of search the user is performing (e.g. regular or regex)
+  #format the search term according to search type
+  if arguments_web["roitype"].value == "normal":
+    roi = set([letter for letter in roi_raw])
+  elif arguments_web["roitype"].value == "regex":
+    roi = roi_raw
+    roi_user_print = roi_raw
+    try: #check if search term present in text file
+         #if it is, fetch the correct regex to use instead of term 
+      with open("advanced_search","r") as f:
+        for line in f:
+          if roi == line.split()[0].upper(): 
+            roi = line.split()[1].upper()
+            break
+    except:
+      commenter("Error raised in open(advanced_search)")
+
+  # get fasta sequence.. # no need to split text to list, since it's
+  # already index-able
+  #seq = [chrctr for chrctr in sequence_web] #split sequence text to a list
+  seq = sequence_web
+  #print "seq=",seq,"<br><br>ROI=",roi
 
 ##############################
 #######generate bar plot######
  
-  #fig = plt.figure(figsize=(8,2))
   fig = plt.figure(figsize=(8,2))
 
   plt2 = fig.add_subplot(111)
   colors = ['blue','green','red','black','pink']
+  #dictionary of color-pellate types
   colors = {"standard": plt.cm.Dark2(np.linspace(0,0.85,len(roi))),
             "bytype": {"D":"#ff6666","E":"red",
                        "R":"Blue", "H":"cyan", "K":"#6666ff"},
-            "black":'black'
+            "black":'black',
+            "dark": plt.cm.Dark2(np.linspace(0,0.85,len(roi)))
            }
-  #colors = plt.cm.Dark2(np.linspace(0,0.85,len(roi)))
   yheights = []
   xheights = []
   if arguments_web["roitype"].value == "regex":
-    print "<mark>RegEx is an experimental feature. Use with caution.</mark><br>"
-    resultRegEx = re.finditer(roi, ''.join(seq))
-    print "<pre>Sequence:<br>",''.join(seq),"</pre>"
-    print "Found RegEx matches at residues:<br>"
+    commenter("Advanced search (regex) query: {}".format(roi))
+    resultRegEx = re.finditer(roi, (seq))
+    print "Found matches at position(s):<br>"
     regexList = []
+    za = resultRegEx
     for m in resultRegEx:
       regexList.append((int(m.start()+1),int(m.end()+1)))
-      print m.start()+1
+      commenter("regex result: {}".format(m.group()))
+      print "Residues> {} - {}.<br>".format(m.start()+1,m.end())
     print "<br>"
   nt = 1 #set to 1 so sequence starts at 1
   check = 1
+  
+  #updated faster algorithm for "normal" search. >2x faster than
+  # normal_old_slow.
   if arguments_web["roitype"].value == "normal":
+    #make dictionary with ROIs as Keys:
+    commenter("ROI (search terms): {}".format(roi))
+    roi_dict = dict((term,[]) for term in roi)
+    commenter("roi_dict that was generated: {}".format(roi_dict))
+    #y_locations_of_roi_in_seq = [(roi_dict[char].append(pos+1),char) for pos, char in enumerate(seq) if char in roi]
+    for pos, char in enumerate(seq):
+      if char in roi: 
+        roi_dict[char].append(pos+1)
+    
+    to_print = '' 
+    for key, val in roi_dict.iteritems():
+      to_print += "> {} @ {}. ({}) <br>".format(key,str(val)[1:-1],len(val))
+    printp("Location of search terms: <br>{}".format(to_print))
+    printp("Time before drawing figure: {}<br>".format(datetime.datetime.now() - startTime))
+    commenter("roi_dict: {}".format(roi_dict))
+    color_num = 0 #used as counter to enumerate different color to each set of bars
+    for (a_roi, locations) in (roi_dict.iteritems()):
+      xheights = locations
+      y_height = 1 #can set this variable somewhere outside of this function
+      #so it can be used by others
+      yheights = [y_height for a in locations]
+      if locations:
+        rects = plt2.bar(xheights,yheights,color=colors["standard"][color_num],
+                       alpha=1,width=0.9,linewidth=0,
+                       label=a_roi, gid="ssRectTest")
+      color_num += 1
+
+  if arguments_web["roitype"].value == "normal_old_slow":
     for n, residue in enumerate(roi):
       for i, aacid in enumerate(seq):
         if aacid == residue:
@@ -350,8 +389,11 @@ def main():
             check = 1
           xheights.append(i+nt)
       if colorscheme == "standard":
-        rects = plt2.bar(xheights,yheights,color=colors["standard"][n],alpha=1,width=0.9,
-            linewidth=0,align='edge',label=residue,gid="ssRectTest")
+        rects = plt2.bar(xheights,yheights,
+                         color=colors["standard"][n],
+                         alpha=1,width=0.9,
+                         linewidth=0,align='edge',
+                         label=residue,gid="ssRectTest")
       
       elif colorscheme == "bytype":
         rects = plt2.bar(xheights,yheights,color=colors["bytype"].setdefault(residue,"black"),alpha=1,width=0.9,
@@ -360,7 +402,7 @@ def main():
       xheights = []
       yheights = []
   elif arguments_web["roitype"].value == "regex":
-    print "generating regex figure"
+    commenter("generating regex figure")
     
     regexListX = [x for x,xf in regexList]
     regexListX = []
@@ -374,10 +416,10 @@ def main():
   plt.legend(loc='center left', bbox_to_anchor=(1.01,0.5), fontsize=10)
 
   #plot gray divide lines
-  for item in np.arange(1,len(seq)+1,1): 
-    plt.axvline(item,color='gray',
-                linewidth=0.2,linestyle='-',alpha=0.5)  
-
+  #for item in np.arange(1,len(seq)+1,1): 
+  #  plt.axvline(item,color='gray',
+  #              linewidth=0.2,linestyle='-',alpha=0.5)  
+  
 
   plt.subplots_adjust(top=0.8,left=0.1,right=0.9,bottom=0.25)
 
@@ -389,12 +431,14 @@ def main():
     right='off',         # ticks along the top edge are off
     labelleft='off') # labels along the bottom edge are off
   if len(seq) > 60:
-    plt.xticks(np.arange(0,351,20))
+    plt.xticks(np.arange(0,len(seq),round(len(seq)/15,-1)))
   ax1 = plt.subplot(111)
   ax = fig.gca()
+  ax.set_axis_bgcolor('#f7f7f7')
  # ax = plt.gca()
   #for x,y in ((2.5,rects[0].get_y()),(4.5,-0.2)):
   #a1 = rects[0].get_y()
+  #used for residue labels
   a1 = 0
   a2 = range(1,len(seq)+1,1)
   a3 = []
@@ -412,7 +456,7 @@ def main():
     plt.title("Location of amino acids: %s." 
              % ', '.join(roi))
   elif arguments_web["roitype"].value == "regex":
-    plt.title("Location of RegEx: %s" % roi)
+    plt.title("Location of: %s" % roi_user_print)
   plt.xlabel("Residue number")
 #  plt.ylabel("AA present")
 #  plt2.bar(xheights,yheights,color='blue',alpha=1,#width=0.05,
@@ -421,15 +465,29 @@ def main():
 #  print "<br> almost <br>"
   plt.savefig("../test.%s"%filetype, dpi=dpi_web)
 #  print "<br><br><br> DONEEE ! <br><br>"
-  print "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"/css/svg1.css\"></head>"
-  print "Figure shown below.<br>"
+  javascript_1 = """
+  <script type="text/javascript">
+    var mytextbox = document.getElementById('mytext');
+    var mydropdown = document.getElementById('dropdown');
+
+    mydropdown.onchange = function(){
+          mytextbox.value = mytextbox.value  + this.value; //to appened
+         //mytextbox.innerHTML = this.value;
+    }
+  </script>
+  """  
+
+
+  print "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"/css/svg1.css\">{jscript_1}</head>".format(jscript_1=javascript_1)
+  print "<br>"
   print "Number of residues: ",len(seq),"<br>"
   print "<a href=\"test.%s\">Click here to view full size image</a>"%filetype
   print "<br>"
  # print "<object data=\"test.svg\" type=\"image/svg+xml\"></object>"
   print "<body><img src=\"test.%s\" alt=\"test png\" width=\"800\"></body></html>"%filetype
 #  print "Post image"
-
+  print "<br>"
+  print datetime.datetime.now() - startTime
 
 if __name__ == "__main__":
     main()
