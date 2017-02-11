@@ -4,3 +4,4 @@ LeucineZipperOld    (L......)(?=(L)){2,}     Protein dimerization motif
 WalkerPLoop)   [AG]....GK[ST]           ATP or GTP binding motif
 SH3Domain       .PP.P                    Need to double check this
 ZincFinger       C.{2,4}C.{12}H.{3,5}H    Need to double check this
+CK2              ([ST]..)*[ST]([DE]|(..[DE])) Not that great....

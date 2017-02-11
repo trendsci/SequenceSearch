@@ -277,8 +277,7 @@ def main():
     fasta_id, sequence_web = seq_parse_uniprot(uniprot_id)
     printp("Fasta from uniprot {} <br> {}".format(uniprot_id, fasta_id),
             new_line=False)
-    print "Sequence:", #prints the sequence in nice format
-    printp(seq_printer(sequence_web), new_line=False)
+    printp("Sequence:<br>{}".format(seq_printer(sequence_web)), new_line=False)
 
   elif seq_source == "user":
     sequence_web = ''.join(arguments_web["seq"].value.upper().split())
@@ -294,11 +293,15 @@ def main():
   elif arguments_web["roitype"].value == "regex":
     roi = roi_raw
     roi_user_print = roi_raw
-    with open("advanced_search","r") as f:
-      for line in f:
-        if roi == line.split()[0].upper(): 
-          roi = line.split()[1].upper()
-          break
+    try: #check if search term present in text file
+         #if it is, fetch the correct regex to use instead of term 
+      with open("advanced_search","r") as f:
+        for line in f:
+          if roi == line.split()[0].upper(): 
+            roi = line.split()[1].upper()
+            break
+    except:
+      commenter("Error raised in open(advanced_search)")
 
   # get fasta sequence.. # no need to split text to list, since it's
   # already index-able
@@ -309,26 +312,22 @@ def main():
 ##############################
 #######generate bar plot######
  
-  #fig = plt.figure(figsize=(8,2))
   fig = plt.figure(figsize=(8,2))
 
   plt2 = fig.add_subplot(111)
   colors = ['blue','green','red','black','pink']
+  #dictionary of color-pellate types
   colors = {"standard": plt.cm.Dark2(np.linspace(0,0.85,len(roi))),
             "bytype": {"D":"#ff6666","E":"red",
                        "R":"Blue", "H":"cyan", "K":"#6666ff"},
-            "black":'black'
+            "black":'black',
+            "dark": plt.cm.Dark2(np.linspace(0,0.85,len(roi)))
            }
-  #colors = plt.cm.Dark2(np.linspace(0,0.85,len(roi)))
   yheights = []
   xheights = []
   if arguments_web["roitype"].value == "regex":
     commenter("Advanced search (regex) query: {}".format(roi))
-    #print "This is an experimental feature. Use with caution.<br><br>"
-    #resultRegEx = re.finditer(roi, ''.join(seq))
-
     resultRegEx = re.finditer(roi, (seq))
-#    print "<pre>Sequence:<br>",''.join(seq),"</pre>"
     print "Found matches at position(s):<br>"
     regexList = []
     za = resultRegEx
@@ -349,8 +348,14 @@ def main():
     commenter("roi_dict that was generated: {}".format(roi_dict))
     #y_locations_of_roi_in_seq = [(roi_dict[char].append(pos+1),char) for pos, char in enumerate(seq) if char in roi]
     for pos, char in enumerate(seq):
-      if char in roi: roi_dict[char].append(pos+1)
-    print "<br>Time before drawing figure: {}<br>".format(datetime.datetime.now() - startTime)
+      if char in roi: 
+        roi_dict[char].append(pos+1)
+    
+    to_print = '' 
+    for key, val in roi_dict.iteritems():
+      to_print += "> {} @ {}. ({}) <br>".format(key,str(val)[1:-1],len(val))
+    printp("Location of search terms: <br>{}".format(to_print))
+    printp("Time before drawing figure: {}<br>".format(datetime.datetime.now() - startTime))
     commenter("roi_dict: {}".format(roi_dict))
     color_num = 0 #used as counter to enumerate different color to each set of bars
     for (a_roi, locations) in (roi_dict.iteritems()):
@@ -358,7 +363,8 @@ def main():
       y_height = 1 #can set this variable somewhere outside of this function
       #so it can be used by others
       yheights = [y_height for a in locations]
-      rects = plt2.bar(xheights,yheights,color=colors["standard"][color_num],
+      if locations:
+        rects = plt2.bar(xheights,yheights,color=colors["standard"][color_num],
                        alpha=1,width=0.9,linewidth=0,
                        label=a_roi, gid="ssRectTest")
       color_num += 1
