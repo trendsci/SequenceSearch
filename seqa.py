@@ -36,45 +36,6 @@ import datetime
 #  colors_list = zip(colors_list.split()[2::7],colors_list.split()[1::7])
 #  colors_dict = dict(colors_list)
 
-def findRoi(seq,roi,roi_label):
-  seq_w_roi = []
-  roi_in_seq = 0
-  for char in seq:
-    if char == roi:
-      roi_in_seq += 1
-      seq_w_roi.append(roi_label)
-    else:
-      seq_w_roi.append(char)
-  return seq_w_roi, roi_in_seq
-
-def findRoiDomains(seq,roi,roi_label,domains,n_term_linker = 3):
- # print "Domains used:",
- # print ', '.join(sorted(domains.keys()))
- # print 'Residue of interest', roi,'\n'
-  roi_in_protein = 0
-
-  #qyres = []
-  #qplot = (qres, qyres)
-  for domain in sorted(domains.keys()):
-    seq_w_roi = []
-    roi_in_domain = 0
-    #print '\n'
-  #  print domain, 'Residues:',
-  #  print domains[domain]
-    for char in seq[domains[domain][0]+(n_term_linker-1):domains[domain][1]+n_term_linker]:
-      if char in roi or char in roi_label:
-        roi_in_domain += 1
-        roi_in_protein += 1
-        seq_w_roi.append(roi_label[char])
-        #seq_w_roi.append('\033[0;34;1;40m'+char+'\033[0m')
-      else:
-        seq_w_roi.append(char)
-  #  print ''.join(seq_w_roi)
-    perc = float(roi_in_domain)/len(seq_w_roi)*100
-    output = (str(roi_in_domain)+'/'+str(len(seq_w_roi))+'  '+ '%.1f'+"%%\n") % (perc)
-  #  print output
-  #roiperc = float(roi_in_protein)/len(seq_w_roi)
-  #print 'Total', roi,':',roi_in_protein,',','%.1f%%' % (roiperc)
 
 def printp(text, pre=True, new_line=True):
   """Print text surroundd by <pre> ... </pre>"""
@@ -148,7 +109,8 @@ def unicode_labels():
 
 
 def domains_info():
-  """Update this function to include domain information"""
+  """For future use. Currently not used
+  Update this function to include domain information"""
   #domains can be redifined from UNIPROT or other databases in the future
   domains = {'1_Q1'  : (-2,100,0),
              '2_KID' : (85,160,1),
