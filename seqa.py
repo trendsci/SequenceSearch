@@ -11,109 +11,30 @@ import re
 import datetime
 #from scipy.interpolate import spline
 
-
-def calculateRoi(seq,roi,roi_label='0'):
-  #seq_w_roi = []
-  roi_in_seq = 0
-  for char in seq:
-    if char == roi:
-      roi_in_seq += 1
-  return roi_in_seq
-
-#  qres = [[i,n] for i,n in enumerate(seq)]
-
-def generate_qplot(seq,roi,sequence_file='protein',one_plot=0,domains={},
-                   colors='standard',savefig=True):
-#  pbar = pb.progress_indicator()
-#  pbar.max_progress = len(seq)
-  val = 4 #+- residues that are effected by nearby ROI. Default=4.
-  height = val #hight of plotted ROI
-  domain_line_width = wid = 1 #width for domain borders
-  domain_line_color = col = 'black' #color for domain borders
-  if 'x' in roi: 
-    plt.subplot(2, 1, 1)
-  for domain in domains.keys():
-    if domains[domain][2] == 1:
-      plt.axvline(x=domains[domain][0], linewidth=domain_line_width,
-                color=domain_line_color)
-      #print domains[domain][0]
-  plt.ylim([0,height*4])
-  plt.xlim(0,len(seq))
-  qres = [[i,n,0] for i,n in enumerate(seq)]
-  #print qres
-
-  colors_l = ['#E60606','black','yellow','orange','red','green','blue',
-            'green','red','orange','green','black','gray','orange','purple']#deprecated.
-  colors_list = """[230,6,6] #E60606 R - Arg - Arginine
-    [198,66,0]  #C64200 K - Lys - Lysine
-    [255,102,0] #FF6600 Q - Gln - Glutamine
-    [255,153,0] #FF9900 N - Asn - Asparagine
-    [255,204,0] #FFCC00 E - Glu - Glutamic_Acid
-    [255,204,153] #FFCC99 D - Asp - Aspartic_Acid
-    [255,255,153] #FFFF99 H - His - Histidine
-    [255,255,0] #FFFF00 P - Pro - Proline
-    [204,255,204] #CCFFCC Y - Tyr - Tyrosine
-    [204,153,255] #CC99FF W - Trp - Tryptophan
-    [204,255,153] #CCFF99 S - Ser - Serine
-    [0,255,153] #00FF99 T - Thr - Threonine
-    [0,255,0] #00FF00 G - Gly - Glycine
-    [204,255,255] #CCFFFF A - Ala - Alanine
-    [153,204,255] #99CCFF M - Met - Methionine
-    [0,255,255] #00FFFF C - Cys - Cysteine
-    [0,204,255] #00CCFF F - Phe - Phenylalanine
-    [51,102,255]  #3366FF L - Leu - Leucine
-    [0,0,255] #0000FF V - Val - Valine
-    [0,0,128] #000080 I - Ile - Isoleucine"""
-  colors_list = zip(colors_list.split()[2::7],colors_list.split()[1::7])
-  colors_dict = dict(colors_list)
-  if colors == 'bw': colors_dict = {}
-  for c,aminoacid in enumerate(roi):
-    print 'Working on residue type:',aminoacid
-    if aminoacid == 'x':
-      plt.legend()
-      plt.ylim(0,height*4)
-      plt.subplot(2, 1, 2)
-      continue
-    #list(aminoacid)
-    if one_plot == True:
-      aminoacid=roi
-    else:
-      for i in qres: i[2]=0 #reset qres
-    for i, char in enumerate(seq):
- #     pbar.progress_percent(current_progress = i)
-     # print "i",i
-      if char in aminoacid:
-        for k in range(i-val,i+val):
-          if k >= 0 and k <= len(seq)-1:
-            num = height - abs(k-i)
-            if num >= 0:
-              qres[k][2] += height - abs(k-i)
-            else:
-              qres[k][2] += 0
-            #print 'char',char, qres[k][2], 'qres', 'k', k,'i',i
-    #print qres
-    xval = [ x for x,aa,y in qres]
-    yval = [ y for x,aa,y in qres]
-    if len(seq) < 500:
-      xvalnew = np.linspace(0,len(seq),len(seq)*10)
-      yvalnew = spline(xval,yval,xvalnew)
-    else:
-      yvalnew = yval
-      xvalnew = xval
-    plot = plt.fill_between(xvalnew, yvalnew,0, color=colors_dict.get(aminoacid,'black'), linewidth=1, label=aminoacid, alpha=1)
-    plot_legened = plt.fill(0, 0, color=colors_dict.get(aminoacid,'black'), linewidth=0, label=aminoacid, alpha=1)
-    if one_plot == True: break
-  #plt.axvline(x=85,linewidth=wid, color=col)
-  #plt.axvline(x=160,linewidth=wid, color=col)
-  #plt.axvline(x=280,linewidth=wid, color=col)
-  plt.ylim(0,height*4)
-  plt.xlim(0,len(seq))
-  plt.title('Amino acid distribution in: '+sequence_file)
-  z = plt.legend()
-  if savefig: 
-    plt.savefig('seqfig.pdf')
-  plt.savefig('seqfig.pdf')
-  plt.show()
+#  colors_l = ['#E60606','black','yellow','orange','red','green','blue',
+#            'green','red','orange','green','black','gray','orange','purple']#deprecated.
+#  colors_list = """[230,6,6] #E60606 R - Arg - Arginine
+#    [198,66,0]  #C64200 K - Lys - Lysine
+#    [255,102,0] #FF6600 Q - Gln - Glutamine
+#    [255,153,0] #FF9900 N - Asn - Asparagine
+#    [255,204,0] #FFCC00 E - Glu - Glutamic_Acid
+#    [255,204,153] #FFCC99 D - Asp - Aspartic_Acid
+#    [255,255,153] #FFFF99 H - His - Histidine
+#    [255,255,0] #FFFF00 P - Pro - Proline
+#    [204,255,204] #CCFFCC Y - Tyr - Tyrosine
+#    [204,153,255] #CC99FF W - Trp - Tryptophan
+#    [204,255,153] #CCFF99 S - Ser - Serine
+#    [0,255,153] #00FF99 T - Thr - Threonine
+#    [0,255,0] #00FF00 G - Gly - Glycine
+#    [204,255,255] #CCFFFF A - Ala - Alanine
+#    [153,204,255] #99CCFF M - Met - Methionine
+#    [0,255,255] #00FFFF C - Cys - Cysteine
+#    [0,204,255] #00CCFF F - Phe - Phenylalanine
+#    [51,102,255]  #3366FF L - Leu - Leucine
+#    [0,0,255] #0000FF V - Val - Valine
+#    [0,0,128] #000080 I - Ile - Isoleucine"""
+#  colors_list = zip(colors_list.split()[2::7],colors_list.split()[1::7])
+#  colors_dict = dict(colors_list)
 
 def findRoi(seq,roi,roi_label):
   seq_w_roi = []
@@ -252,8 +173,19 @@ def main():
   #read in the POST or GET parameters passed from the HTML GUI
   #arguments_web = cgi.FieldStorage()
   arguments_web = parse_CGI_param()
+  #output the arguments the script received from the web (via POST or GET)
+  commenter("arguments supplied via CGI: {}".format(arguments_web))
+
 
   # define variables
+  ########################VARIABLE DEFINITIONS###################
+  ###############################################################  
+  # expected variables:
+  # roi - residue of interest (string)
+  # roitype - normal string or regex expression ('normal'/'regex')
+  # etc...
+
+
   seq_source = str(arguments_web["seqsource"].value)
   sequence_file = ""
   dpi_web = int(arguments_web["dpi"].value)
@@ -269,6 +201,11 @@ def main():
     show_res_label = arguments_web["label"].value
   except:
     show_res_label = 0
+
+  # done defining variables from CGI passed parameters
+  ##############################################################
+  ##############################################################
+
  
   #check where to get ASCII sequence from (e.g. uniprot or user input)
   if seq_source == "uniprot":
@@ -369,38 +306,6 @@ def main():
                        label=a_roi, gid="ssRectTest")
       color_num += 1
 
-  if arguments_web["roitype"].value == "normal_old_slow":
-    for n, residue in enumerate(roi):
-      for i, aacid in enumerate(seq):
-        if aacid == residue:
-          yheights.append(1)
-          xheights.append(i+nt)
-          #print i, nt, aacid,xheights
-          if check:
-            check = 0
-          else:
-            check = 1
-        else:
-          if check == 1: 
-            yheights.append(0)
-            check = 0
-          else:
-            yheights.append(0)
-            check = 1
-          xheights.append(i+nt)
-      if colorscheme == "standard":
-        rects = plt2.bar(xheights,yheights,
-                         color=colors["standard"][n],
-                         alpha=1,width=0.9,
-                         linewidth=0,align='edge',
-                         label=residue,gid="ssRectTest")
-      
-      elif colorscheme == "bytype":
-        rects = plt2.bar(xheights,yheights,color=colors["bytype"].setdefault(residue,"black"),alpha=1,width=0.9,
-            linewidth=0,align='edge',label=residue)
-    
-      xheights = []
-      yheights = []
   elif arguments_web["roitype"].value == "regex":
     commenter("generating regex figure")
     
@@ -488,6 +393,14 @@ def main():
 #  print "Post image"
   print "<br>"
   print datetime.datetime.now() - startTime
+  try: 
+    return roi_dict
+  except:
+    pass
+  try:
+    return regexList
+  except:
+    pass
 
 if __name__ == "__main__":
     main()

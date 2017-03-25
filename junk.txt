@@ -1,0 +1,27 @@
+Content-type: text/html
+
+
+<pre>Sequence from user input</pre>
+<pre>Sequence: <br>    1 ASDFA </pre> Found matches at position(s):<br>
+Residues> 1 - 1.<br>
+Residues> 5 - 5.<br>
+<br>
+<done>
+<html><head><link rel="stylesheet" type="text/css" href="/css/svg1.css">
+  <script type="text/javascript">
+    var mytextbox = document.getElementById('mytext');
+    var mydropdown = document.getElementById('dropdown');
+
+    mydropdown.onchange = function(){
+          mytextbox.value = mytextbox.value  + this.value; //to appened
+         //mytextbox.innerHTML = this.value;
+    }
+  </script>
+  </head>
+<br>
+Number of residues:  5 <br>
+<a href="test.png">Click here to view full size image</a>
+<br>
+<body><img src="test.png" alt="test png" width="800"></body></html>
+<br>
+0:00:00.548276
