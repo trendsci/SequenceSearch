@@ -1,0 +1,65 @@
+
+colors_l = ['#E60606','black','yellow','orange','red','green','blue',
+#            'green','red','orange','green','black','gray','orange','purple']#deprecated.
+#  colors_list = """[230,6,6] #E60606 R - Arg - Arginine
+#    [198,66,0]  #C64200 K - Lys - Lysine
+#    [255,102,0] #FF6600 Q - Gln - Glutamine
+#    [255,153,0] #FF9900 N - Asn - Asparagine
+#    [255,204,0] #FFCC00 E - Glu - Glutamic_Acid
+#    [255,204,153] #FFCC99 D - Asp - Aspartic_Acid
+#    [255,255,153] #FFFF99 H - His - Histidine
+#    [255,255,0] #FFFF00 P - Pro - Proline
+#    [204,255,204] #CCFFCC Y - Tyr - Tyrosine
+#    [204,153,255] #CC99FF W - Trp - Tryptophan
+#    [204,255,153] #CCFF99 S - Ser - Serine
+#    [0,255,153] #00FF99 T - Thr - Threonine
+#    [0,255,0] #00FF00 G - Gly - Glycine
+#    [204,255,255] #CCFFFF A - Ala - Alanine
+#    [153,204,255] #99CCFF M - Met - Methionine
+#    [0,255,255] #00FFFF C - Cys - Cysteine
+#    [0,204,255] #00CCFF F - Phe - Phenylalanine
+#    [51,102,255]  #3366FF L - Leu - Leucine
+#    [0,0,255] #0000FF V - Val - Valine
+#    [0,0,128] #000080 I - Ile - Isoleucine"""
+#  colors_list = zip(colors_list.split()[2::7],colors_list.split()[1::7])
+#  colors_dict = dict(colors_list)
+
+
+
+
+
+
+
+
+
+
+def unicode_labels():
+  #Unicode symbols to enter in text if needed
+  possible_labels = [unicode(u'\u2588').encode('utf-8'),
+                     unicode(u'\u2592').encode('utf-8'),
+                     unicode(u'\u2591').encode('utf-8'),
+                     unicode(u'\u2663').encode('utf-8'),
+                     unicode(u'\u25B2').encode('utf-8'),
+                     unicode(u'\u2206').encode('utf-8')]
+  return possible_labels
+
+
+def domains_info():
+  """For future use. Currently not used
+  Update this function to include domain information"""
+  #domains can be redifined from UNIPROT or other databases in the future
+  domains = {'1_Q1'  : (-2,100,0),
+             '2_KID' : (85,160,1),
+             '3_Q2'  : (160,280,1),
+             '4_bZip': (270,341,1),
+             '5_MTSL1': (302,318,0),
+             '6_DNAbinding' :(286,305,0)}
+  n_term_linker = 0 #not in use, for future
+  c_term_linker = 0 #not in use, for future
+
+
+
+
+
+:wq
+

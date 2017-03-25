@@ -24,4 +24,4 @@ Number of residues:  5 <br>
 <br>
 <body><img src="test.png" alt="test png" width="800"></body></html>
 <br>
-0:00:00.625143
+0:00:00.565990

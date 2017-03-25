@@ -9,33 +9,6 @@ import sys
 import urllib2
 import re
 import datetime
-#from scipy.interpolate import spline
-
-#  colors_l = ['#E60606','black','yellow','orange','red','green','blue',
-#            'green','red','orange','green','black','gray','orange','purple']#deprecated.
-#  colors_list = """[230,6,6] #E60606 R - Arg - Arginine
-#    [198,66,0]  #C64200 K - Lys - Lysine
-#    [255,102,0] #FF6600 Q - Gln - Glutamine
-#    [255,153,0] #FF9900 N - Asn - Asparagine
-#    [255,204,0] #FFCC00 E - Glu - Glutamic_Acid
-#    [255,204,153] #FFCC99 D - Asp - Aspartic_Acid
-#    [255,255,153] #FFFF99 H - His - Histidine
-#    [255,255,0] #FFFF00 P - Pro - Proline
-#    [204,255,204] #CCFFCC Y - Tyr - Tyrosine
-#    [204,153,255] #CC99FF W - Trp - Tryptophan
-#    [204,255,153] #CCFF99 S - Ser - Serine
-#    [0,255,153] #00FF99 T - Thr - Threonine
-#    [0,255,0] #00FF00 G - Gly - Glycine
-#    [204,255,255] #CCFFFF A - Ala - Alanine
-#    [153,204,255] #99CCFF M - Met - Methionine
-#    [0,255,255] #00FFFF C - Cys - Cysteine
-#    [0,204,255] #00CCFF F - Phe - Phenylalanine
-#    [51,102,255]  #3366FF L - Leu - Leucine
-#    [0,0,255] #0000FF V - Val - Valine
-#    [0,0,128] #000080 I - Ile - Isoleucine"""
-#  colors_list = zip(colors_list.split()[2::7],colors_list.split()[1::7])
-#  colors_dict = dict(colors_list)
-
 
 def printp(text, pre=True, new_line=True):
   """Print text surroundd by <pre> ... </pre>"""
@@ -74,7 +47,6 @@ def seq_parse_uniprot(uniprotID):
      fasta format of first sequence in uniprot entry
      returns fasta_id, sequence_fasta
   """
-  _ = None
   uniprot_id = uniprotID.strip().replace('\n','').replace('\r','')
   sequence_web_object = urllib2.urlopen(
       'http://www.uniprot.org/uniprot/{}.fasta'.format(uniprot_id))
@@ -97,30 +69,6 @@ def seq_printer(text, block_size=10, line_size=40, numbered='left'):
 
   return f_out
 
-def unicode_labels():
-  #Unicode symbols to enter in text if needed
-  possible_labels = [unicode(u'\u2588').encode('utf-8'),
-                     unicode(u'\u2592').encode('utf-8'),
-                     unicode(u'\u2591').encode('utf-8'),
-                     unicode(u'\u2663').encode('utf-8'),
-                     unicode(u'\u25B2').encode('utf-8'),
-                     unicode(u'\u2206').encode('utf-8')]
-  return possible_labels
-
-
-def domains_info():
-  """For future use. Currently not used
-  Update this function to include domain information"""
-  #domains can be redifined from UNIPROT or other databases in the future
-  domains = {'1_Q1'  : (-2,100,0),
-             '2_KID' : (85,160,1),
-             '3_Q2'  : (160,280,1),
-             '4_bZip': (270,341,1),
-             '5_MTSL1': (302,318,0),
-             '6_DNAbinding' :(286,305,0)}
-  n_term_linker = 0 #not in use, for future
-  c_term_linker = 0 #not in use, for future
-
 def main():
   #time this program, set start time.
   startTime = datetime.datetime.now()
@@ -138,7 +86,6 @@ def main():
   #output the arguments the script received from the web (via POST or GET)
   commenter("arguments supplied via CGI: {}".format(arguments_web))
 
-
   # define variables
   ########################VARIABLE DEFINITIONS###################
   ###############################################################  
@@ -146,24 +93,20 @@ def main():
   # roi - residue of interest (string)
   # roitype - normal string or regex expression ('normal'/'regex')
   # etc...
-
-
   seq_source = str(arguments_web["seqsource"].value)
   sequence_file = ""
   dpi_web = int(arguments_web["dpi"].value)
   filetype = arguments_web["filetype"].value
   colorscheme = arguments_web["colorscheme"].value
-  
+  roitype = arguments_web["roitype"].value 
   #roi is "Residues Of Interest"
   #get the search term from user input (e.g. residues or RegEx expression)
   roi_raw = arguments_web["roi"].value.upper()
-
   #disaply amino acid type for each residue?
   try:
     show_res_label = arguments_web["label"].value
   except:
     show_res_label = 0
-
   # done defining variables from CGI passed parameters
   ##############################################################
   ##############################################################
@@ -187,9 +130,9 @@ def main():
 
   #Check what type of search the user is performing (e.g. regular or regex)
   #format the search term according to search type
-  if arguments_web["roitype"].value == "normal":
+  if roitype == "normal":
     roi = set([letter for letter in roi_raw])
-  elif arguments_web["roitype"].value == "regex":
+  elif roitype == "regex":
     roi = roi_raw
     roi_user_print = roi_raw
     try: #check if search term present in text file
@@ -224,7 +167,7 @@ def main():
            }
   yheights = []
   xheights = []
-  if arguments_web["roitype"].value == "regex":
+  if roitype == "regex":
     commenter("Advanced search (regex) query: {}".format(roi))
     resultRegEx = re.finditer(roi, (seq))
     print "Found matches at position(s):<br>"
@@ -240,7 +183,7 @@ def main():
   
   #updated faster algorithm for "normal" search. >2x faster than
   # normal_old_slow.
-  if arguments_web["roitype"].value == "normal":
+  if roitype == "normal":
     #make dictionary with ROIs as Keys:
     commenter("ROI (search terms): {}".format(roi))
     roi_dict = dict((term,[]) for term in roi)
@@ -268,7 +211,7 @@ def main():
                        label=a_roi, gid="ssRectTest")
       color_num += 1
 
-  elif arguments_web["roitype"].value == "regex":
+  elif roitype == "regex":
     commenter("generating regex figure")
     
     regexListX = [x for x,xf in regexList]
@@ -319,10 +262,10 @@ def main():
 ##  ax1.text(3,0,"W",fontsize=0.75/1.8*dpi_web/float(len(seq)),
 ##           ha='center', va='bottom')#,transform=ax.transAxes)
   title_roi_format = ''.join(roi)
-  if arguments_web["roitype"].value == "normal":
+  if roitype == "normal":
     plt.title("Location of amino acids: %s." 
              % ', '.join(roi))
-  elif arguments_web["roitype"].value == "regex":
+  elif roitype == "regex":
     plt.title("Location of: %s" % roi_user_print)
   plt.xlabel("Residue number")
 #  plt.ylabel("AA present")
