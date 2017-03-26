@@ -39,6 +39,9 @@ def commenter(text, comments_file="seqa_comments.txt",
   return 1 #simply return 1 to indicate all is well
 
 def parse_CGI_param():
+  """parse the cgi parameters passed via GET or POST
+     this function can be overloaded to emulae CGI parameters from a script
+  """
   arguments_web = cgi.FieldStorage()
   return arguments_web
 
@@ -57,14 +60,16 @@ def seq_parse_uniprot(uniprotID):
   commenter("Uniprot sequence: {}".format(sequence_web))
   return fasta_id, sequence_web  
 
-def seq_printer(text, block_size=10, line_size=40, numbered='left'):
+def seq_printer(text, block_size=10, line_size=40, numbered='left',
+                seperator="<br>"):
+  """Print sequence in nice block format (similar to protparam output)"""
   f_out = "" # f_out stands for: formatted_output
   for i in range(0,len(text),block_size):
     ij = i + 1
     if ij == 1:
       f_out += " %4s "%(str(ij))
     elif (ij-1)%line_size == 0: 
-      f_out += "<br> %4s "%(str(ij))
+      f_out += "%s %4s "%(seperator,str(ij))
     f_out += text[i:i+block_size] + " "
 
   return f_out
