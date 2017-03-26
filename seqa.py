@@ -70,10 +70,9 @@ def seq_printer(text, block_size=10, line_size=40, numbered='left'):
   return f_out
 
 def main():
+  """Description here"""
   #time this program, set start time.
   startTime = datetime.datetime.now()
-
-  """Description to be added here"""
   commenter("Program started at {}".format(datetime.datetime.utcnow()))
   #save error stream to file
   sys.stderr = open('stderr_seqa_py.txt', 'w')
@@ -299,11 +298,8 @@ def main():
   print "<br>"
   print datetime.datetime.now() - startTime
   try: 
-    return roi_dict
-  except:
-    pass
-  try:
-    return regexList
+    if roitype == "normal": return roi_dict
+    if roitype == "regex" : return regexList
   except:
     pass
 
