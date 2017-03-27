@@ -1,12 +1,6 @@
 Content-type: text/html
 
 
-<pre>Sequence from user input</pre>
-<pre>Sequence: <br>    1 ASDFA </pre> Found matches at position(s):<br>
-Residues> 1 - 1.<br>
-Residues> 5 - 5.<br>
-<br>
-<done>
 <html><head><link rel="stylesheet" type="text/css" href="/css/svg1.css">
   <script type="text/javascript">
     var mytextbox = document.getElementById('mytext');
@@ -18,10 +12,18 @@ Residues> 5 - 5.<br>
     }
   </script>
   </head>
+<body>
+<pre title='This sequence was entered by the user'>Sequence from user input</pre>
+<pre >Sequence (length: 5):<br>    1 ASDFA </pre> Found matches at position(s):<br>
+Residues> 1 - 1.<br>
+Residues> 5 - 5.<br>
+<br>
+<done>
 <br>
 Number of residues:  5 <br>
 <a href="test.png">Click here to view full size image</a>
 <br>
-<body><img src="test.png" alt="test png" width="800"></body></html>
+<img src="test.png" alt="test png" width="800">
 <br>
-0:00:00.556707
+0:00:00.594639
+</body></html>

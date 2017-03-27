@@ -10,10 +10,10 @@ import urllib2
 import re
 import datetime
 
-def printp(text, pre=True, new_line=True):
+def printp(text, pre=True, new_line=True, title=""):
   """Print text surroundd by <pre> ... </pre>"""
   if pre:
-    text = "<pre>{}</pre>".format(text)
+    text = "<pre {title}>{text}</pre>".format(title=title,text=text)
   if new_line: 
     print text
   else:
@@ -74,6 +74,18 @@ def seq_printer(text, block_size=10, line_size=40, numbered='left',
 
   return f_out
 
+class html_printer():
+  def __init__(self, stdout=sys.stdout, HTML_to_add = "<br>", HTML_total=""):
+    self.HTML_to_add = HTML_to_add
+    self.HTML_total = HTML_total
+    self.stdout = stdout
+  def add_HTML(self,HTML_to_add):
+    self.HTML_total += HTML_to_add
+  def write(self,text):
+    self.add_HTML(text)
+  def print_HTML(self):
+    self.stdout.write(self.HTML_total)
+
 def main():
   """Description here"""
   #time this program, set start time.
@@ -81,6 +93,14 @@ def main():
   commenter("Program started at {}".format(datetime.datetime.utcnow()))
   #save error stream to file
   sys.stderr = open('stderr_seqa_py.txt', 'w')
+
+
+  html_output = ""
+  ##Overload print statement, instead of directly printing to screen,
+  ##we will save output to a varible and print the final page at once.
+  sysSTDOUT = sys.stdout #save original reference
+  sys.stdout = html_printer(stdout=sysSTDOUT) #assign new reference
+
   #enable python web presentation on dreamhost
   print "Content-type: text/html\n\n"
 
@@ -115,6 +135,25 @@ def main():
   ##############################################################
   ##############################################################
 
+
+  ## Simple HTML openning with head section ##
+  ############################################
+  ############################################
+  javascript_1 = """
+  <script type="text/javascript">
+    var mytextbox = document.getElementById('mytext');
+    var mydropdown = document.getElementById('dropdown');
+
+    mydropdown.onchange = function(){
+          mytextbox.value = mytextbox.value  + this.value; //to appened
+         //mytextbox.innerHTML = this.value;
+    }
+  </script>
+  """  
+
+  print "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"/css/svg1.css\">{jscript_1}</head>".format(jscript_1=javascript_1)
+  print "<body>"
+
  
   #check where to get ASCII sequence from (e.g. uniprot or user input)
   if seq_source == "uniprot":
@@ -123,13 +162,17 @@ def main():
     fasta_id, sequence_web = seq_parse_uniprot(uniprot_id)
     printp("Fasta from uniprot {} <br> {}".format(uniprot_id, fasta_id),
             new_line=False)
-    printp("Sequence:<br>{}".format(seq_printer(sequence_web)), new_line=False)
+   # printp("Sequence:<br>{}".format(seq_printer(sequence_web)), new_line=False)
 
   elif seq_source == "user":
     sequence_web = ''.join(arguments_web["seq"].value.upper().split())
-    printp("Sequence from user input")
-    printp("Sequence: <br>{}".format(seq_printer(sequence_web)), new_line=False)
+    printp("Sequence from user input",title="title='This sequence was entered by the user'")
+    #printp("Sequence: <br>{}".format(seq_printer(sequence_web)), new_line=False)
 
+
+  seq = sequence_web
+  seq_len = len(seq)
+  printp("Sequence (length: {seql}):<br>{seq}".format(seql=seq_len,seq=seq_printer(sequence_web)), new_line=False)
 
 
   #Check what type of search the user is performing (e.g. regular or regex)
@@ -149,15 +192,9 @@ def main():
     except:
       commenter("Error raised in open(advanced_search)")
 
-  # get fasta sequence.. # no need to split text to list, since it's
-  # already index-able
-  #seq = [chrctr for chrctr in sequence_web] #split sequence text to a list
-  seq = sequence_web
-  #print "seq=",seq,"<br><br>ROI=",roi
 
 ##############################
 #######generate bar plot######
- 
   fig = plt.figure(figsize=(8,2))
 
   plt2 = fig.add_subplot(111)
@@ -200,7 +237,7 @@ def main():
     to_print = '' 
     for key, val in roi_dict.iteritems():
       to_print += "> {} @ {}. ({}) <br>".format(key,str(val)[1:-1],len(val))
-    printp("Location of search terms: <br>{}".format(to_print))
+    printp("Location of search terms:<br>{}".format(to_print), title="title='Search term @ locations found. (number of occurances)'")
     printp("Time before drawing figure: {}<br>".format(datetime.datetime.now() - startTime))
     commenter("roi_dict: {}".format(roi_dict))
     color_num = 0 #used as counter to enumerate different color to each set of bars
@@ -244,8 +281,8 @@ def main():
     left='off',      # ticks along the bottom edge are off
     right='off',         # ticks along the top edge are off
     labelleft='off') # labels along the bottom edge are off
-  if len(seq) > 60:
-    plt.xticks(np.arange(0,len(seq),round(len(seq)/15,-1)))
+  if seq_len > 60:
+    plt.xticks(np.arange(0,seq_len,round(seq_len/15,-1)))
   ax1 = plt.subplot(111)
   ax = fig.gca()
   ax.set_axis_bgcolor('#f7f7f7')
@@ -254,14 +291,14 @@ def main():
   #a1 = rects[0].get_y()
   #used for residue labels
   a1 = 0
-  a2 = range(1,len(seq)+1,1)
+  a2 = range(1,seq_len+1,1)
   a3 = []
   for a in a2:
     a3.append((a+0.5,a1))
 
   if show_res_label == "AA_each":
     for i, (x,y) in enumerate(a3):
-      ax1.text(x,y,seq[i],fontsize=0.75*96*3/float(len(seq)),
+      ax1.text(x,y,seq[i],fontsize=0.75*96*3/float(seq_len),
            ha='center', va='bottom')#,transform=ax.transAxes)
 ##  ax1.text(3,0,"W",fontsize=0.75/1.8*dpi_web/float(len(seq)),
 ##           ha='center', va='bottom')#,transform=ax.transAxes)
@@ -275,33 +312,19 @@ def main():
 #  plt.ylabel("AA present")
 #  plt2.bar(xheights,yheights,color='blue',alpha=1,#width=0.05,
 #          edgecolor='blue',align='center')
-  ax1.set_xlim(1,len(seq)+1)
+  ax1.set_xlim(1,seq_len+1)
 #  print "<br> almost <br>"
   plt.savefig("../test.%s"%filetype, dpi=dpi_web)
-#  print "<br><br><br> DONEEE ! <br><br>"
-  javascript_1 = """
-  <script type="text/javascript">
-    var mytextbox = document.getElementById('mytext');
-    var mydropdown = document.getElementById('dropdown');
 
-    mydropdown.onchange = function(){
-          mytextbox.value = mytextbox.value  + this.value; //to appened
-         //mytextbox.innerHTML = this.value;
-    }
-  </script>
-  """  
-
-
-  print "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"/css/svg1.css\">{jscript_1}</head>".format(jscript_1=javascript_1)
-  print "<br>"
-  print "Number of residues: ",len(seq),"<br>"
   print "<a href=\"test.%s\">Click here to view full size image</a>"%filetype
   print "<br>"
  # print "<object data=\"test.svg\" type=\"image/svg+xml\"></object>"
-  print "<body><img src=\"test.%s\" alt=\"test png\" width=\"800\"></body></html>"%filetype
-#  print "Post image"
+  print "<img src=\"test.%s\" alt=\"test png\" width=\"800\">"%filetype
   print "<br>"
   print datetime.datetime.now() - startTime
+  print "</body></html>"
+
+  sys.stdout.print_HTML()
   try: 
     if roitype == "normal": return roi_dict
     if roitype == "regex" : return regexList
