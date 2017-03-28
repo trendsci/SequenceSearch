@@ -19,11 +19,9 @@ Residues> 1 - 1.<br>
 Residues> 5 - 5.<br>
 <br>
 <done>
-<br>
-Number of residues:  5 <br>
 <a href="test.png">Click here to view full size image</a>
 <br>
 <img src="test.png" alt="test png" width="800">
 <br>
-0:00:00.594639
+0:00:00.607182
 </body></html>

@@ -1,0 +1,14 @@
+List of CGI POST/GET parameters used in the sequence analysis program.
+
+Parameters	Type	Description
+seqsource	string	sequence source. i.e. user input, uniprot, etc.
+seq		string	sequence. ASCII text with the sequence to be searched,
+			or source identifier such as uniprot ID.
+dpi		int	Represents the resolution of final figure
+roi		string
+roitype		string	search type: normal, regex
+filetype	string	
+colorscheme	string
+label		string	Should plot show residue labels? 0 - no, "AA_each" -
+			show 1-letter amino acid name for each residue
+

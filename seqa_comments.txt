@@ -2483,3 +2483,195 @@
 -->  regex result: A
 -->  generating regex figure
 -->  Uniprot sequence: MTMDSGADNQQSGDAAVTEAESQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
+-->  Program started at 2017-03-27 01:04:43.684258
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', '[P][ST]'), MiniFieldStorage('roitype', 'regex'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'S16220'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Program started at 2017-03-27 01:08:43.648189
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', '[P][ST]'), MiniFieldStorage('roitype', 'regex'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P16220'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Uniprot sequence: MTMESGAENQQSGDAAVTEAENQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
+-->  Advanced search (regex) query: [P][ST]
+-->  regex result: PT
+-->  regex result: PS
+-->  regex result: PS
+-->  regex result: PT
+-->  regex result: PS
+-->  regex result: PT
+-->  regex result: PT
+-->  generating regex figure
+-->  Program started at 2017-03-27 01:26:17.106140
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'CK2'), MiniFieldStorage('roitype', 'regex'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P16220'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Uniprot sequence: MTMESGAENQQSGDAAVTEAENQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
+-->  Advanced search (regex) query: ([ST]..)*[ST]([DE]|(..[DE]))
+-->  regex result: TMESGAE
+-->  regex result: TE
+-->  regex result: SCKD
+-->  regex result: TIAE
+-->  regex result: SEDSQESVDSVTD
+-->  regex result: SD
+-->  regex result: SE
+-->  regex result: TD
+-->  regex result: TD
+-->  regex result: TLIE
+-->  regex result: SD
+-->  generating regex figure
+-->  Program started at 2017-03-27 01:26:40.610211
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'CK2'), MiniFieldStorage('roitype', 'regex'), MiniFieldStorage('advanced_search_term', 'leucineZipper'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P16220'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Uniprot sequence: MTMESGAENQQSGDAAVTEAENQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
+-->  Advanced search (regex) query: ([ST]..)*[ST]([DE]|(..[DE]))
+-->  regex result: TMESGAE
+-->  regex result: TE
+-->  regex result: SCKD
+-->  regex result: TIAE
+-->  regex result: SEDSQESVDSVTD
+-->  regex result: SD
+-->  regex result: SE
+-->  regex result: TD
+-->  regex result: TD
+-->  regex result: TLIE
+-->  regex result: SD
+-->  generating regex figure
+-->  Program started at 2017-03-27 01:26:56.672325
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', '[X]'), MiniFieldStorage('roitype', 'regex'), MiniFieldStorage('advanced_search_term', 'leucineZipper'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P16220'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Uniprot sequence: MTMESGAENQQSGDAAVTEAENQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
+-->  Advanced search (regex) query: [X]
+-->  generating regex figure
+-->  Program started at 2017-03-27 01:27:10.755955
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', '[A]'), MiniFieldStorage('roitype', 'regex'), MiniFieldStorage('advanced_search_term', 'leucineZipper'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P16220'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Uniprot sequence: MTMESGAENQQSGDAAVTEAENQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
+-->  Advanced search (regex) query: [A]
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  generating regex figure
+-->  Program started at 2017-03-27 01:27:55.121632
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', '[A]'), MiniFieldStorage('roitype', 'regex'), MiniFieldStorage('advanced_search_term', 'leucineZipper'), MiniFieldStorage('seqsource', 'user'), MiniFieldStorage('seq', 'P16220AA'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Advanced search (regex) query: [A]
+-->  regex result: A
+-->  regex result: A
+-->  generating regex figure
+-->  Program started at 2017-03-27 01:28:03.157310
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', '[A]'), MiniFieldStorage('roitype', 'regex'), MiniFieldStorage('advanced_search_term', 'leucineZipper'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P16220AA'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Program started at 2017-03-27 01:28:13.640877
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', '[A]'), MiniFieldStorage('roitype', 'regex'), MiniFieldStorage('advanced_search_term', 'leucineZipper'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P16220'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Uniprot sequence: MTMESGAENQQSGDAAVTEAENQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
+-->  Advanced search (regex) query: [A]
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  regex result: A
+-->  generating regex figure
+-->  Program started at 2017-03-27 01:28:22.987211
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', '[G]'), MiniFieldStorage('roitype', 'regex'), MiniFieldStorage('advanced_search_term', 'leucineZipper'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P16220'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Uniprot sequence: MTMESGAENQQSGDAAVTEAENQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
+-->  Advanced search (regex) query: [G]
+-->  regex result: G
+-->  regex result: G
+-->  regex result: G
+-->  regex result: G
+-->  regex result: G
+-->  regex result: G
+-->  regex result: G
+-->  regex result: G
+-->  regex result: G
+-->  regex result: G
+-->  regex result: G
+-->  regex result: G
+-->  regex result: G
+-->  regex result: G
+-->  regex result: G
+-->  regex result: G
+-->  generating regex figure
+-->  Program started at 2017-03-27 01:28:36.319912
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'CK2'), MiniFieldStorage('roitype', 'regex'), MiniFieldStorage('advanced_search_term', 'leucineZipper'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P16220'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Uniprot sequence: MTMESGAENQQSGDAAVTEAENQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
+-->  Advanced search (regex) query: ([ST]..)*[ST]([DE]|(..[DE]))
+-->  regex result: TMESGAE
+-->  regex result: TE
+-->  regex result: SCKD
+-->  regex result: TIAE
+-->  regex result: SEDSQESVDSVTD
+-->  regex result: SD
+-->  regex result: SE
+-->  regex result: TD
+-->  regex result: TD
+-->  regex result: TLIE
+-->  regex result: SD
+-->  generating regex figure
+-->  Program started at 2017-03-27 01:34:42.028358
+-->  arguments supplied via CGI: {'roi': <test1.f instance at 0x283d4d4ecf8>, 'roitype': <test1.f instance at 0x283d4d4ec68>, 'seq': <test1.f instance at 0x283d4d4ea70>, 'seqsource': <test1.f instance at 0x283d4d4eb00>, 'advanced_search_term': <test1.f instance at 0x283d4d4e878>, 'colorscheme': <test1.f instance at 0x283d4d4e8c0>, 'filetype': <test1.f instance at 0x283d4d4e950>, 'dpi': <test1.f instance at 0x283d4d4e9e0>}
+-->  ROI (search terms): set(['A'])
+-->  roi_dict that was generated: {'A': []}
+-->  roi_dict: {'A': [1, 5]}
+-->  Program started at 2017-03-27 01:34:42.800319
+-->  arguments supplied via CGI: {'roi': <test1.f instance at 0x283d4d4e7a0>, 'roitype': <test1.f instance at 0x283d4d4e710>, 'seq': <test1.f instance at 0x283d2c49c68>, 'seqsource': <test1.f instance at 0x283d2c49bd8>, 'advanced_search_term': <test1.f instance at 0x283d2bede60>, 'colorscheme': <test1.f instance at 0x283d524d440>, 'filetype': <test1.f instance at 0x283d524d200>, 'dpi': <test1.f instance at 0x283d2c49dd0>}
+-->  Advanced search (regex) query: [A]
+-->  regex result: A
+-->  regex result: A
+-->  generating regex figure
+-->  Uniprot sequence: MTMDSGADNQQSGDAAVTEAESQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
