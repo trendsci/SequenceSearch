@@ -1,0 +1,7 @@
+numpy
+matplotlib
+cgi
+sys
+urllib2
+re
+datetime
