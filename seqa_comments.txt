@@ -3280,3 +3280,15 @@
 -->  regex result: A
 -->  generating regex figure
 -->  Uniprot sequence: MTMDSGADNQQSGDAAVTEAESQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD
+-->  Program started at 2017-03-29 04:11:15.457973
+-->  arguments supplied via CGI: {'roi': <test1.f instance at 0x2b13f5ff710>, 'roitype': <test1.f instance at 0x2b13f5ff518>, 'seq': <test1.f instance at 0x2b13f5ff368>, 'seqsource': <test1.f instance at 0x2b13f5ff3f8>, 'advanced_search_term': <test1.f instance at 0x2b13f5ff488>, 'colorscheme': <test1.f instance at 0x2b13f5ff1b8>, 'filetype': <test1.f instance at 0x2b13f5ff248>, 'dpi': <test1.f instance at 0x2b13f5ff2d8>}
+-->  ROI (search terms): set(['A'])
+-->  roi_dict that was generated: {'A': []}
+-->  roi_dict: {'A': [1, 5]}
+-->  Program started at 2017-03-29 04:11:16.677697
+-->  arguments supplied via CGI: {'roi': <test1.f instance at 0x2b13f5ff128>, 'roitype': <test1.f instance at 0x2b13f5ff098>, 'seq': <test1.f instance at 0x2b13f344908>, 'seqsource': <test1.f instance at 0x2b13d28efc8>, 'advanced_search_term': <test1.f instance at 0x2b13f5ee680>, 'colorscheme': <test1.f instance at 0x2b14b26b878>, 'filetype': <test1.f instance at 0x2b14b26b710>, 'dpi': <test1.f instance at 0x2b14b26b680>}
+-->  Advanced search (regex) query: [A]
+-->  regex result: A
+-->  regex result: A
+-->  generating regex figure
+-->  Uniprot sequence: MTMDSGADNQQSGDAAVTEAESQQMTVQAQPQIATLAQVSMPAAHATSSAPTVTLVQLPNGQTVQVHGVIQAAQPSVIQSPQVQTVQSSCKDLKRLFSGTQISTIAESEDSQESVDSVTDSQKRREILSRRPSYRKILNDLSSDAPGVPRIEEEKSEEETSAPAITTVTVPTPIYQTSSGQYIAITQGGAIQLANNGTDGVQGLQTLTMTNAAATQPGTTILQYAQTTDGQQILVPSNQVVVQAASGDVQTYQIRTAPTSTIAPGVVMASSPALPTQPAEEAARKREVRLMKNREAARECRRKKKEYVKCLENRVAVLENQNKTLIEELKALKDLYCHKSD

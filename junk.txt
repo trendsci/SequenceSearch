@@ -34,6 +34,6 @@ Residuese> 5 - 5.<br>
    <div id="debug_info" style="display:none;">
     
 <pre  style='margin:0;'>Sequence from user input</pre>
-<pre  style='padding:0;margin:0;'>Timing of program:<br>Time before drawing figure: 0:00:00.001399<br>Time after drawing figure: 0:00:00.563318<br>Time to draw figure: 0:00:00.561919</pre>
+<pre  style='padding:0;margin:0;'>Timing of program:<br>Time before drawing figure: 0:00:00.001331<br>Time after drawing figure: 0:00:00.573171<br>Time to draw figure: 0:00:00.571840</pre>
 </div>
 </body></html>

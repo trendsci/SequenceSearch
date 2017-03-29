@@ -4,4 +4,4 @@ python:
 #install:
 #  -- "pip install -r requirements.txt --use-mirrors"
 script:
-  - python -m unittest test1.py
+  - python -m unittest test1
