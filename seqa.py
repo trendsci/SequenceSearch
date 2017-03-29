@@ -9,103 +9,25 @@ import sys
 import urllib2
 import re
 import datetime
+from sequtil.sequtil import * #my own package with dependancies for this program
 
-def printp(text, pre=True, new_line=True, title=""):
-  """Print text surroundd by <pre> ... </pre>"""
-  if pre:
-    text = "<pre {title}>{text}</pre>".format(title=title,text=text)
-  if new_line: 
-    print text
-  else:
-    print text,
-
-def commenter(text, comments_file="seqa_comments.txt", 
-              append=True, new_line=True, marker=True):
-  """Allowes one to print out comments or debug information to a file.
-     text = text to be saved in file
-     comments_file = location of file 
-     append = append existing text or start off with new file
-  """
-  if new_line:
-    text += '\n'
-  if marker:
-    text = '-->  ' + text
-  if append:
-    with open(comments_file, "a+") as f:
-      f.write(text)
-  else:
-    with open(comments_file, "w+") as f:
-      f.write(text)
-  return 1 #simply return 1 to indicate all is well
-
-def parse_CGI_param():
-  """parse the cgi parameters passed via GET or POST
-     this function can be overloaded to emulae CGI parameters from a script
-  """
-  arguments_web = cgi.FieldStorage()
-  return arguments_web
-
-def seq_parse_uniprot(uniprotID):
-  """Takes uniprotID and returns sequence in 
-     fasta format of first sequence in uniprot entry
-     returns fasta_id, sequence_fasta
-  """
-  uniprot_id = uniprotID.strip().replace('\n','').replace('\r','')
-  sequence_web_object = urllib2.urlopen(
-      'http://www.uniprot.org/uniprot/{}.fasta'.format(uniprot_id))
-  fasta_id = sequence_web_object.readline()
-  sequence_web = sequence_web_object.read()
-  sequence_web = sequence_web.upper().strip().replace('\n','').replace('\r','')
-  #sequence_web now contains the fasta 
-  commenter("Uniprot sequence: {}".format(sequence_web))
-  return fasta_id, sequence_web  
-
-def seq_printer(text, block_size=10, line_size=40, numbered='left',
-                seperator="<br>"):
-  """Print sequence in nice block format (similar to protparam output)"""
-  f_out = "" # f_out stands for: formatted_output
-  for i in range(0,len(text),block_size):
-    ij = i + 1
-    if ij == 1:
-      f_out += " %4s "%(str(ij))
-    elif (ij-1)%line_size == 0: 
-      f_out += "%s %4s "%(seperator,str(ij))
-    f_out += text[i:i+block_size] + " "
-
-  return f_out
-
-class html_printer():
-  def __init__(self, stdout=sys.stdout, HTML_to_add = "<br>", HTML_total=""):
-    self.HTML_to_add = HTML_to_add
-    self.HTML_total = HTML_total
-    self.stdout = stdout
-  def add_HTML(self,HTML_to_add):
-    self.HTML_total += HTML_to_add
-  def write(self,text):
-    self.add_HTML(text)
-  def print_HTML(self):
-    self.stdout.write(self.HTML_total)
 
 def main():
   """Description here"""
   #time this program, set start time.
-  startTime = datetime.datetime.now()
+  time_start = datetime.datetime.now()
   commenter("Program started at {}".format(datetime.datetime.utcnow()))
   #save error stream to file
   sys.stderr = open('stderr_seqa_py.txt', 'w')
 
-
-  html_output = ""
   ##Overload print statement, instead of directly printing to screen,
   ##we will save output to a varible and print the final page at once.
-  sysSTDOUT = sys.stdout #save original reference
-  sys.stdout = html_printer(stdout=sysSTDOUT) #assign new reference
+  sys.stdout = html_printer(stdout=sys.stdout) #assign new reference
 
   #enable python web presentation on dreamhost
   print "Content-type: text/html\n\n"
 
   #read in the POST or GET parameters passed from the HTML GUI
-  #arguments_web = cgi.FieldStorage()
   arguments_web = parse_CGI_param()
   #output the arguments the script received from the web (via POST or GET)
   commenter("arguments supplied via CGI: {}".format(arguments_web))
@@ -118,11 +40,11 @@ def main():
   # roitype - normal string or regex expression ('normal'/'regex')
   # etc...
   seq_source = str(arguments_web["seqsource"].value)
-  sequence_file = ""
   dpi_web = int(arguments_web["dpi"].value)
   filetype = arguments_web["filetype"].value
   colorscheme = arguments_web["colorscheme"].value
-  roitype = arguments_web["roitype"].value 
+  roitype = arguments_web["roitype"].value
+  seq_input = arguments_web["seq"].value.upper() 
   #roi is "Residues Of Interest"
   #get the search term from user input (e.g. residues or RegEx expression)
   roi_raw = arguments_web["roi"].value.upper()
@@ -148,27 +70,30 @@ def main():
           mytextbox.value = mytextbox.value  + this.value; //to appened
          //mytextbox.innerHTML = this.value;
     }
+
+   function showhide(id) {
+    var e = document.getElementById(id);
+    e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+ }    
+
   </script>
   """  
-
   print "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"/css/svg1.css\">{jscript_1}</head>".format(jscript_1=javascript_1)
   print "<body>"
 
  
   #check where to get ASCII sequence from (e.g. uniprot or user input)
   if seq_source == "uniprot":
-    uniprot_id = ''.join(arguments_web["seq"].value.split())
+    uniprot_id = ''.join(seq_input.split())
     #get fasta_id and sequence in fasta format from uniprot
-    fasta_id, sequence_web = seq_parse_uniprot(uniprot_id)
-    printp("Fasta from uniprot {} <br> {}".format(uniprot_id, fasta_id),
-            new_line=False)
+    fasta_id, sequence_web = seq_parse_uniprot(uniprot_id) 
+    sequence_source = "Fasta from uniprot {}<br>{}".format(uniprot_id, fasta_id[:])
+    printp("Fasta from uniprot {}<br>{}".format(uniprot_id,seq_printer(fasta_id.rstrip(),block_size=60,line_size=60,numbered=False,seperator="..<br>")),tag="style='margin:0;'")
    # printp("Sequence:<br>{}".format(seq_printer(sequence_web)), new_line=False)
 
   elif seq_source == "user":
-    sequence_web = ''.join(arguments_web["seq"].value.upper().split())
-    printp("Sequence from user input",title="title='This sequence was entered by the user'")
-    #printp("Sequence: <br>{}".format(seq_printer(sequence_web)), new_line=False)
-
+    sequence_web = ''.join(seq_input.split())
+    sequence_source = "Sequence from user input"
 
   seq = sequence_web
   seq_len = len(seq)
@@ -195,6 +120,7 @@ def main():
 
 ##############################
 #######generate bar plot######
+  time_before_figure = datetime.datetime.now() - time_start
   fig = plt.figure(figsize=(8,2))
 
   plt2 = fig.add_subplot(111)
@@ -217,7 +143,7 @@ def main():
     for m in resultRegEx:
       regexList.append((int(m.start()+1),int(m.end()+1)))
       commenter("regex result: {}".format(m.group()))
-      print "Residues> {} - {}.<br>".format(m.start()+1,m.end())
+      print "Residuese> {} - {}.<br>".format(m.start()+1,m.end())
     print "<br>"
   nt = 1 #set to 1 so sequence starts at 1
   check = 1
@@ -237,8 +163,8 @@ def main():
     to_print = '' 
     for key, val in roi_dict.iteritems():
       to_print += "> {} @ {}. ({}) <br>".format(key,str(val)[1:-1],len(val))
-    printp("Location of search terms:<br>{}".format(to_print), title="title='Search term @ locations found. (number of occurances)'")
-    printp("Time before drawing figure: {}<br>".format(datetime.datetime.now() - startTime))
+    printp("Location of search terms:<br>{}".format(to_print), title="title='Search term @ locations found. (number of occurances)'",new_line=False)
+
     commenter("roi_dict: {}".format(roi_dict))
     color_num = 0 #used as counter to enumerate different color to each set of bars
     for (a_roi, locations) in (roi_dict.iteritems()):
@@ -272,7 +198,7 @@ def main():
   #              linewidth=0.2,linestyle='-',alpha=0.5)  
   
 
-  plt.subplots_adjust(top=0.8,left=0.1,right=0.9,bottom=0.25)
+  plt.subplots_adjust(top=0.8,left=0.05,right=0.9,bottom=0.25)
 
   plt.ylim(0,1)
   plt.tick_params(
@@ -315,13 +241,24 @@ def main():
   ax1.set_xlim(1,seq_len+1)
 #  print "<br> almost <br>"
   plt.savefig("../test.%s"%filetype, dpi=dpi_web)
-
-  print "<a href=\"test.%s\">Click here to view full size image</a>"%filetype
-  print "<br>"
+  time_after_figure = datetime.datetime.now() - time_start
+  time_to_draw_figure = time_after_figure - time_before_figure
  # print "<object data=\"test.svg\" type=\"image/svg+xml\"></object>"
-  print "<img src=\"test.%s\" alt=\"test png\" width=\"800\">"%filetype
+  print "<img src=\"test.%s\" alt=\"test png\" width=\"650\">"%filetype
   print "<br>"
-  print datetime.datetime.now() - startTime
+  print "<a href=\"test.%s\" target=\"_blank\">View full size image</a>"%filetype
+  print "<br>"
+ 
+  print """<a href="javascript:showhide('debug_info')">
+        Show/hide debug information
+    </a>
+   <div id="debug_info" style="display:none;">
+    """
+  
+  printp(sequence_source,tag="style='margin:0;'")
+  printp("Timing of program:<br>Time before drawing figure: {}<br>Time after drawing figure: {}<br>Time to draw figure: {}".format(time_before_figure,time_after_figure,time_to_draw_figure),tag="style='padding:0;margin:0;'")
+  print "</div>"
+
   print "</body></html>"
 
   sys.stdout.print_HTML()

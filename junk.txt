@@ -10,18 +10,30 @@ Content-type: text/html
           mytextbox.value = mytextbox.value  + this.value; //to appened
          //mytextbox.innerHTML = this.value;
     }
+
+   function showhide(id) {
+    var e = document.getElementById(id);
+    e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+ }    
+
   </script>
   </head>
 <body>
-<pre title='This sequence was entered by the user'>Sequence from user input</pre>
-<pre >Sequence (length: 5):<br>    1 ASDFA </pre> Found matches at position(s):<br>
-Residues> 1 - 1.<br>
-Residues> 5 - 5.<br>
+<pre  >Sequence (length: 5):<br>    1 ASDFA </pre> Found matches at position(s):<br>
+Residuese> 1 - 1.<br>
+Residuese> 5 - 5.<br>
 <br>
 <done>
-<a href="test.png">Click here to view full size image</a>
+<img src="test.png" alt="test png" width="650">
 <br>
-<img src="test.png" alt="test png" width="800">
+<a href="test.png" target="_blank">View full size image</a>
 <br>
-0:00:00.607182
+<a href="javascript:showhide('debug_info')">
+        Show/hide debug information
+    </a>
+   <div id="debug_info" style="display:none;">
+    
+<pre  style='margin:0;'>Sequence from user input</pre>
+<pre  style='padding:0;margin:0;'>Timing of program:<br>Time before drawing figure: 0:00:00.001399<br>Time after drawing figure: 0:00:00.563318<br>Time to draw figure: 0:00:00.561919</pre>
+</div>
 </body></html>
