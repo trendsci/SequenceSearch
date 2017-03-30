@@ -89,6 +89,8 @@ class html_printer():
     self.add_HTML(text)
   def print_HTML(self):
     self.stdout.write(self.HTML_total)
+  def get_HTML(self):
+    return self.HTML_total
   def get_original_stdout(self):
     return self.stdout
 

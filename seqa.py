@@ -10,9 +10,20 @@ import urllib2
 import re
 import datetime
 from sequtil.sequtil import * #my own package with dependancies for this program
+import signal
+
+def printException(text, target="html"):
+  if target == "html":  
+    print "Content-type: text/html\n\n"
+    print "<br>"
+    print text
 
 
-def main():
+#def sig_hand(signal, frame):
+#  print "all good"
+#  sys.exit(0)
+
+def main(printer):
   """Description here"""
   #time this program, set start time.
   time_start = datetime.datetime.now()
@@ -22,15 +33,15 @@ def main():
 
   ##Overload print statement, instead of directly printing to screen,
   ##we will save output to a varible and print the final page at once.
-  sys.stdout = html_printer(stdout=sys.stdout) #assign new reference
+  sys.stdout = printer #html_printer(stdout=sys.stdout) #assign new reference
 
   #enable python web presentation on dreamhost
-  print "Content-type: text/html\n\n"
-
+  #html_setup = "Content-type: text/html\n\n"
+  #print "Content-type: text/html\n\n"
   #read in the POST or GET parameters passed from the HTML GUI
-  arguments_web = parse_CGI_param()
-  #output the arguments the script received from the web (via POST or GET)
-  commenter("arguments supplied via CGI: {}".format(arguments_web))
+  try:
+    arguments_web = parse_CGI_param()
+    commenter("arguments supplied via CGI: {}".format(arguments_web))
 
   # define variables
   ########################VARIABLE DEFINITIONS###################
@@ -39,24 +50,26 @@ def main():
   # roi - residue of interest (string)
   # roitype - normal string or regex expression ('normal'/'regex')
   # etc...
-  seq_source = str(arguments_web["seqsource"].value)
-  dpi_web = int(arguments_web["dpi"].value)
-  filetype = arguments_web["filetype"].value
-  colorscheme = arguments_web["colorscheme"].value
-  roitype = arguments_web["roitype"].value
-  seq_input = arguments_web["seq"].value.upper() 
+    seq_source = str(arguments_web["seqsource"].value)
+    dpi_web = int(arguments_web["dpi"].value)
+    filetype = arguments_web["filetype"].value
+    colorscheme = arguments_web["colorscheme"].value
+    roitype = arguments_web["roitype"].value
+    seq_input = arguments_web["seq"].value.upper() 
   #roi is "Residues Of Interest"
   #get the search term from user input (e.g. residues or RegEx expression)
-  roi_raw = arguments_web["roi"].value.upper()
+    roi_raw = arguments_web["roi"].value.upper()
   #disaply amino acid type for each residue?
-  try:
-    show_res_label = arguments_web["label"].value
-  except:
-    show_res_label = 0
+    try:
+      show_res_label = arguments_web["label"].value
+    except:
+      show_res_label = 0
   # done defining variables from CGI passed parameters
   ##############################################################
   ##############################################################
-
+  except Exception as e:
+    return "<h3>Error</h3>Error parsing provided parameters from form.<br>Did you leave a field empty or filled the form incorrectly?<br>Try to go back and fix your submission<br><br>Program terminated.<br><br>Traceback:<br>({})".format(e)
+  #output the arguments the script received from the web (via POST or GET)
 
   ## Simple HTML openning with head section ##
   ############################################
@@ -261,7 +274,7 @@ def main():
 
   print "</body></html>"
 
-  sys.stdout.print_HTML()
+  return  sys.stdout.get_HTML()
   try: 
     if roitype == "normal": return roi_dict
     if roitype == "regex" : return regexList
@@ -269,4 +282,11 @@ def main():
     pass
 
 if __name__ == "__main__":
-    main()
+  html_header = "Content-type: text/html\n\n"
+  p = html_printer()
+  try:
+    content = main(printer=p)
+  except Exception as e:
+    content = "Exception occured, critical. Program terminated.<br><br>Traceback:<br>{}".format(e)
+  sys.stdout = p.get_original_stdout()
+  print  "{}{}".format(html_header,content)

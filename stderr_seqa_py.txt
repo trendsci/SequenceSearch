@@ -1,2 +1,0 @@
-/home/sershn/anaconda2/lib/python2.7/site-packages/matplotlib/axes/_axes.py:519: UserWarning: No labelled objects found. Use label='...' kwarg on individual plots.
-  warnings.warn("No labelled objects found. "
