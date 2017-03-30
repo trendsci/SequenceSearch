@@ -3,6 +3,7 @@
 import unittest
 import seqa
 import sys
+import os
 
 class test_seq_parse_uniprot(unittest.TestCase):
   """Test fetching and parsing uniprot fasta sequence from the web"""
@@ -50,7 +51,7 @@ class test_correct_finding_of_roi_in_sequence(unittest.TestCase):
     seqa.parse_CGI_param = self.CGI_dictionary_spoof_function(
     dictToUse=kind)
     consolOut = sys.stdout
-    seqa.sys.stdout = open("junk.txt","w")   
+    seqa.sys.stdout = open(os.devnull,'w') #open("junk.txt","w")   
     found_in_sequence = seqa.main()
     sys.stdout = consolOut
     return found_in_sequence
