@@ -106,7 +106,9 @@ def main(printer, debug=False):
   time_before_figure = datetime.datetime.now() - time_start
   fig = plt.figure(figsize=(8,2))
 
-  plt2 = fig.add_subplot(111)
+  plt_fig1 = fig.add_subplot(111)
+#  plt_fig2 = fig.add_subplot(212)  
+
   colors = ['blue','green','red','black','pink']
   #dictionary of color-pellate types
   colors = {"standard": plt.cm.Dark2(np.linspace(0,0.85,len(roi))),
@@ -156,7 +158,7 @@ def main(printer, debug=False):
       #so it can be used by others
       yheights = [y_height for a in locations]
       if locations:
-        rects = plt2.bar(xheights,yheights,color=colors["standard"][color_num],
+        rects = plt_fig1.bar(xheights,yheights,color=colors["standard"][color_num],
                        alpha=1,width=0.9,linewidth=0,
                        label=a_roi, gid="ssRectTest")
       color_num += 1
@@ -170,7 +172,7 @@ def main(printer, debug=False):
       for i in range(element[0],element[1]):
         regexListX.append(i)
     regexListY = [1 for x in regexListX]
-    rects = plt2.bar(regexListX,regexListY,color=colors["standard"][1],alpha=1,width=0.9,
+    rects = plt_fig1.bar(regexListX,regexListY,color=colors["standard"][1],alpha=1,width=0.9,
             linewidth=0,align='edge')
     print "<done>"
   plt.legend(loc='center left', bbox_to_anchor=(1.01,0.5), fontsize=10)
@@ -219,7 +221,7 @@ def main(printer, debug=False):
     plt.title("Location of: %s" % roi_user_print)
   plt.xlabel("Residue number")
 #  plt.ylabel("AA present")
-#  plt2.bar(xheights,yheights,color='blue',alpha=1,#width=0.05,
+#  plt_fig1.bar(xheights,yheights,color='blue',alpha=1,#width=0.05,
 #          edgecolor='blue',align='center')
   ax1.set_xlim(1,seq_len+1)
 #  print "<br> almost <br>"
