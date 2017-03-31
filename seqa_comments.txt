@@ -179,3 +179,100 @@
 -->  roi_dict: {'A': [1, 5]}
 -->  Program started at 2017-03-30 03:13:15.086253
 -->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'a'), MiniFieldStorage('roitype', 'normal'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'asdfa'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Program started at 2017-03-30 03:14:56.509484
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'a'), MiniFieldStorage('roitype', 'normal'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'asdfa'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Program started at 2017-03-30 03:15:11.362438
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'a'), MiniFieldStorage('roitype', 'normal'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'user'), MiniFieldStorage('seq', 'asdfa\\br'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  ROI (search terms): set(['A'])
+-->  roi_dict that was generated: {'A': []}
+-->  roi_dict: {'A': [1, 5]}
+-->  Program started at 2017-03-30 03:15:23.166967
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'a'), MiniFieldStorage('roitype', 'normal'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'user'), MiniFieldStorage('seq', 'asdfa\\br\\nasdf\\nsa'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  ROI (search terms): set(['A'])
+-->  roi_dict that was generated: {'A': []}
+-->  roi_dict: {'A': [1, 5, 11, 18]}
+-->  Program started at 2017-03-30 03:15:39.549367
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'a\\'), MiniFieldStorage('roitype', 'normal'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'user'), MiniFieldStorage('seq', 'asdfa\\br\\nasdf\\nsa'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  ROI (search terms): set(['A', '\\'])
+-->  roi_dict that was generated: {'A': [], '\\': []}
+-->  roi_dict: {'A': [1, 5, 11, 18], '\\': [6, 9, 15]}
+-->  Program started at 2017-03-30 03:15:48.110505
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'a\\n'), MiniFieldStorage('roitype', 'normal'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'user'), MiniFieldStorage('seq', 'asdfa\\br\\nasdf\\nsa'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  ROI (search terms): set(['A', '\\', 'N'])
+-->  roi_dict that was generated: {'A': [], '\\': [], 'N': []}
+-->  roi_dict: {'A': [1, 5, 11, 18], '\\': [6, 9, 15], 'N': [10, 16]}
+-->  Program started at 2017-03-30 03:17:44.387006
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'a'), MiniFieldStorage('roitype', 'normal'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'user'), MiniFieldStorage('seq', 'adfasdfasdfafdsgdfg'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  ROI (search terms): set(['A'])
+-->  roi_dict that was generated: {'A': []}
+-->  roi_dict: {'A': [1, 4, 8, 12]}
+-->  Program started at 2017-03-30 03:18:00.943895
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roitype', 'normal'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'user'), MiniFieldStorage('seq', 'adfasdfasdfafdsgdfg'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Program started at 2017-03-30 18:57:27.318737
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'DE'), MiniFieldStorage('roitype', 'normal'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'user'), MiniFieldStorage('seq', 'P02769'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  ROI (search terms): set(['E', 'D'])
+-->  roi_dict that was generated: {'E': [], 'D': []}
+-->  roi_dict: {'E': [], 'D': []}
+-->  Program started at 2017-03-30 18:57:38.542747
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'DE'), MiniFieldStorage('roitype', 'normal'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P02769'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Uniprot sequence: MKWVTFISLLLLFSSAYSRGVFRRDTHKSEIAHRFKDLGEEHFKGLVLIAFSQYLQQCPFDEHVKLVNELTEFAKTCVADESHAGCEKSLHTLFGDELCKVASLRETYGDMADCCEKQEPERNECFLSHKDDSPDLPKLKPDPNTLCDEFKADEKKFWGKYLYEIARRHPYFYAPELLYYANKYNGVFQECCQAEDKGACLLPKIETMREKVLASSARQRLRCASIQKFGERALKAWSVARLSQKFPKAEFVEVTKLVTDLTKVHKECCHGDLLECADDRADLAKYICDNQDTISSKLKECCDKPLLEKSHCIAEVEKDAIPENLPPLTADFAEDKDVCKNYQEAKDAFLGSFLYEYSRRHPEYAVSVLLRLAKEYEATLEECCAKDDPHACYSTVFDKLKHLVDEPQNLIKQNCDQFEKLGEYGFQNALIVRYTRKVPQVSTPTLVEVSRSLGKVGTRCCTKPESERMPCTEDYLSLILNRLCVLHEKTPVSEKVTKCCTESLVNRRPCFSALTPDETYVPKAFDEKLFTFHADICTLPDTEKQIKKQTALVELLKHKPKATEEQLKTVMENFVAFVDKCCAADDKEACFAVEGPKLVVSTQTALA
+-->  ROI (search terms): set(['E', 'D'])
+-->  roi_dict that was generated: {'E': [], 'D': []}
+-->  roi_dict: {'E': [30, 40, 41, 62, 69, 72, 81, 87, 97, 106, 116, 119, 121, 124, 149, 154, 164, 176, 190, 195, 206, 210, 231, 250, 253, 267, 275, 300, 308, 315, 317, 323, 334, 344, 356, 363, 375, 377, 381, 382, 406, 419, 423, 448, 465, 467, 473, 488, 494, 502, 518, 527, 543, 554, 564, 565, 572, 588, 594], 'D': [25, 37, 61, 80, 96, 110, 113, 131, 132, 135, 142, 148, 153, 196, 260, 272, 278, 279, 282, 289, 292, 303, 319, 331, 335, 337, 347, 387, 388, 398, 405, 416, 474, 517, 526, 535, 541, 579, 585, 586]}
+-->  Program started at 2017-03-30 19:01:57.482368
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'DE'), MiniFieldStorage('roitype', 'normal'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P02769'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Uniprot sequence: MKWVTFISLLLLFSSAYSRGVFRRDTHKSEIAHRFKDLGEEHFKGLVLIAFSQYLQQCPFDEHVKLVNELTEFAKTCVADESHAGCEKSLHTLFGDELCKVASLRETYGDMADCCEKQEPERNECFLSHKDDSPDLPKLKPDPNTLCDEFKADEKKFWGKYLYEIARRHPYFYAPELLYYANKYNGVFQECCQAEDKGACLLPKIETMREKVLASSARQRLRCASIQKFGERALKAWSVARLSQKFPKAEFVEVTKLVTDLTKVHKECCHGDLLECADDRADLAKYICDNQDTISSKLKECCDKPLLEKSHCIAEVEKDAIPENLPPLTADFAEDKDVCKNYQEAKDAFLGSFLYEYSRRHPEYAVSVLLRLAKEYEATLEECCAKDDPHACYSTVFDKLKHLVDEPQNLIKQNCDQFEKLGEYGFQNALIVRYTRKVPQVSTPTLVEVSRSLGKVGTRCCTKPESERMPCTEDYLSLILNRLCVLHEKTPVSEKVTKCCTESLVNRRPCFSALTPDETYVPKAFDEKLFTFHADICTLPDTEKQIKKQTALVELLKHKPKATEEQLKTVMENFVAFVDKCCAADDKEACFAVEGPKLVVSTQTALA
+-->  ROI (search terms): set(['E', 'D'])
+-->  roi_dict that was generated: {'E': [], 'D': []}
+-->  roi_dict: {'E': [30, 40, 41, 62, 69, 72, 81, 87, 97, 106, 116, 119, 121, 124, 149, 154, 164, 176, 190, 195, 206, 210, 231, 250, 253, 267, 275, 300, 308, 315, 317, 323, 334, 344, 356, 363, 375, 377, 381, 382, 406, 419, 423, 448, 465, 467, 473, 488, 494, 502, 518, 527, 543, 554, 564, 565, 572, 588, 594], 'D': [25, 37, 61, 80, 96, 110, 113, 131, 132, 135, 142, 148, 153, 196, 260, 272, 278, 279, 282, 289, 292, 303, 319, 331, 335, 337, 347, 387, 388, 398, 405, 416, 474, 517, 526, 535, 541, 579, 585, 586]}
+-->  Program started at 2017-03-30 19:03:01.071000
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'WFY'), MiniFieldStorage('roitype', 'normal'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P02769'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Uniprot sequence: MKWVTFISLLLLFSSAYSRGVFRRDTHKSEIAHRFKDLGEEHFKGLVLIAFSQYLQQCPFDEHVKLVNELTEFAKTCVADESHAGCEKSLHTLFGDELCKVASLRETYGDMADCCEKQEPERNECFLSHKDDSPDLPKLKPDPNTLCDEFKADEKKFWGKYLYEIARRHPYFYAPELLYYANKYNGVFQECCQAEDKGACLLPKIETMREKVLASSARQRLRCASIQKFGERALKAWSVARLSQKFPKAEFVEVTKLVTDLTKVHKECCHGDLLECADDRADLAKYICDNQDTISSKLKECCDKPLLEKSHCIAEVEKDAIPENLPPLTADFAEDKDVCKNYQEAKDAFLGSFLYEYSRRHPEYAVSVLLRLAKEYEATLEECCAKDDPHACYSTVFDKLKHLVDEPQNLIKQNCDQFEKLGEYGFQNALIVRYTRKVPQVSTPTLVEVSRSLGKVGTRCCTKPESERMPCTEDYLSLILNRLCVLHEKTPVSEKVTKCCTESLVNRRPCFSALTPDETYVPKAFDEKLFTFHADICTLPDTEKQIKKQTALVELLKHKPKATEEQLKTVMENFVAFVDKCCAADDKEACFAVEGPKLVVSTQTALA
+-->  ROI (search terms): set(['Y', 'W', 'F'])
+-->  roi_dict that was generated: {'Y': [], 'W': [], 'F': []}
+-->  roi_dict: {'Y': [17, 54, 108, 161, 163, 171, 173, 179, 180, 184, 286, 342, 355, 357, 364, 376, 393, 424, 434, 475, 520], 'W': [3, 158, 237], 'F': [6, 13, 22, 35, 43, 51, 60, 73, 94, 126, 150, 157, 172, 188, 229, 246, 251, 332, 349, 353, 397, 418, 426, 511, 525, 530, 532, 574, 577, 591]}
+-->  Program started at 2017-03-30 19:03:55.969984
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'DE'), MiniFieldStorage('roitype', 'normal'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P02769'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Uniprot sequence: MKWVTFISLLLLFSSAYSRGVFRRDTHKSEIAHRFKDLGEEHFKGLVLIAFSQYLQQCPFDEHVKLVNELTEFAKTCVADESHAGCEKSLHTLFGDELCKVASLRETYGDMADCCEKQEPERNECFLSHKDDSPDLPKLKPDPNTLCDEFKADEKKFWGKYLYEIARRHPYFYAPELLYYANKYNGVFQECCQAEDKGACLLPKIETMREKVLASSARQRLRCASIQKFGERALKAWSVARLSQKFPKAEFVEVTKLVTDLTKVHKECCHGDLLECADDRADLAKYICDNQDTISSKLKECCDKPLLEKSHCIAEVEKDAIPENLPPLTADFAEDKDVCKNYQEAKDAFLGSFLYEYSRRHPEYAVSVLLRLAKEYEATLEECCAKDDPHACYSTVFDKLKHLVDEPQNLIKQNCDQFEKLGEYGFQNALIVRYTRKVPQVSTPTLVEVSRSLGKVGTRCCTKPESERMPCTEDYLSLILNRLCVLHEKTPVSEKVTKCCTESLVNRRPCFSALTPDETYVPKAFDEKLFTFHADICTLPDTEKQIKKQTALVELLKHKPKATEEQLKTVMENFVAFVDKCCAADDKEACFAVEGPKLVVSTQTALA
+-->  ROI (search terms): set(['E', 'D'])
+-->  roi_dict that was generated: {'E': [], 'D': []}
+-->  roi_dict: {'E': [30, 40, 41, 62, 69, 72, 81, 87, 97, 106, 116, 119, 121, 124, 149, 154, 164, 176, 190, 195, 206, 210, 231, 250, 253, 267, 275, 300, 308, 315, 317, 323, 334, 344, 356, 363, 375, 377, 381, 382, 406, 419, 423, 448, 465, 467, 473, 488, 494, 502, 518, 527, 543, 554, 564, 565, 572, 588, 594], 'D': [25, 37, 61, 80, 96, 110, 113, 131, 132, 135, 142, 148, 153, 196, 260, 272, 278, 279, 282, 289, 292, 303, 319, 331, 335, 337, 347, 387, 388, 398, 405, 416, 474, 517, 526, 535, 541, 579, 585, 586]}
+-->  Program started at 2017-03-30 21:57:51.385654
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'P'), MiniFieldStorage('roitype', 'normal'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P02769'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Uniprot sequence: MKWVTFISLLLLFSSAYSRGVFRRDTHKSEIAHRFKDLGEEHFKGLVLIAFSQYLQQCPFDEHVKLVNELTEFAKTCVADESHAGCEKSLHTLFGDELCKVASLRETYGDMADCCEKQEPERNECFLSHKDDSPDLPKLKPDPNTLCDEFKADEKKFWGKYLYEIARRHPYFYAPELLYYANKYNGVFQECCQAEDKGACLLPKIETMREKVLASSARQRLRCASIQKFGERALKAWSVARLSQKFPKAEFVEVTKLVTDLTKVHKECCHGDLLECADDRADLAKYICDNQDTISSKLKECCDKPLLEKSHCIAEVEKDAIPENLPPLTADFAEDKDVCKNYQEAKDAFLGSFLYEYSRRHPEYAVSVLLRLAKEYEATLEECCAKDDPHACYSTVFDKLKHLVDEPQNLIKQNCDQFEKLGEYGFQNALIVRYTRKVPQVSTPTLVEVSRSLGKVGTRCCTKPESERMPCTEDYLSLILNRLCVLHEKTPVSEKVTKCCTESLVNRRPCFSALTPDETYVPKAFDEKLFTFHADICTLPDTEKQIKKQTALVELLKHKPKATEEQLKTVMENFVAFVDKCCAADDKEACFAVEGPKLVVSTQTALA
+-->  ROI (search terms): set(['P'])
+-->  roi_dict that was generated: {'P': []}
+-->  roi_dict: {'P': [59, 120, 134, 137, 141, 143, 170, 175, 203, 247, 305, 322, 326, 327, 362, 389, 407, 439, 444, 464, 470, 491, 509, 516, 522, 540, 560, 596]}
+-->  Program started at 2017-03-30 22:48:36.882101
+-->  arguments supplied via CGI: FieldStorage(None, None, [MiniFieldStorage('roi', 'P'), MiniFieldStorage('roitype', 'regex'), MiniFieldStorage('advanced_search_term', 'none'), MiniFieldStorage('seqsource', 'uniprot'), MiniFieldStorage('seq', 'P02769'), MiniFieldStorage('dpi', '96'), MiniFieldStorage('filetype', 'png'), MiniFieldStorage('colorscheme', 'standard')])
+-->  Uniprot sequence: MKWVTFISLLLLFSSAYSRGVFRRDTHKSEIAHRFKDLGEEHFKGLVLIAFSQYLQQCPFDEHVKLVNELTEFAKTCVADESHAGCEKSLHTLFGDELCKVASLRETYGDMADCCEKQEPERNECFLSHKDDSPDLPKLKPDPNTLCDEFKADEKKFWGKYLYEIARRHPYFYAPELLYYANKYNGVFQECCQAEDKGACLLPKIETMREKVLASSARQRLRCASIQKFGERALKAWSVARLSQKFPKAEFVEVTKLVTDLTKVHKECCHGDLLECADDRADLAKYICDNQDTISSKLKECCDKPLLEKSHCIAEVEKDAIPENLPPLTADFAEDKDVCKNYQEAKDAFLGSFLYEYSRRHPEYAVSVLLRLAKEYEATLEECCAKDDPHACYSTVFDKLKHLVDEPQNLIKQNCDQFEKLGEYGFQNALIVRYTRKVPQVSTPTLVEVSRSLGKVGTRCCTKPESERMPCTEDYLSLILNRLCVLHEKTPVSEKVTKCCTESLVNRRPCFSALTPDETYVPKAFDEKLFTFHADICTLPDTEKQIKKQTALVELLKHKPKATEEQLKTVMENFVAFVDKCCAADDKEACFAVEGPKLVVSTQTALA
+-->  Advanced search (regex) query: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  regex result: P
+-->  generating regex figure
