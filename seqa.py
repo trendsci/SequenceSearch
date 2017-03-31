@@ -23,7 +23,7 @@ def printException(text, target="html"):
 #  print "all good"
 #  sys.exit(0)
 
-def main(printer):
+def main(printer, debug=False):
   """Description here"""
   #time this program, set start time.
   time_start = datetime.datetime.now()
@@ -273,20 +273,25 @@ def main(printer):
   print "</div>"
 
   print "</body></html>"
+  if not debug:
+    return  sys.stdout.get_HTML()
+  else:
+    try: 
+      if roitype == "normal": return roi_dict
+      if roitype == "regex" : return regexList
+    except:
+      pass
 
-  return  sys.stdout.get_HTML()
-  try: 
-    if roitype == "normal": return roi_dict
-    if roitype == "regex" : return regexList
-  except:
-    pass
-
-if __name__ == "__main__":
+def run_main(debug=False):
   html_header = "Content-type: text/html\n\n"
   p = html_printer()
   try:
-    content = main(printer=p)
+    content = main(printer=p,debug=debug)
   except Exception as e:
     content = "Exception occured, critical. Program terminated.<br><br>Traceback:<br>{}".format(e)
   sys.stdout = p.get_original_stdout()
   print  "{}{}".format(html_header,content)
+
+if __name__ == "__main__":
+  run_main()
+

@@ -50,10 +50,11 @@ class test_correct_finding_of_roi_in_sequence(unittest.TestCase):
   def find_roi_in_seq_generic(self, kind):
     seqa.parse_CGI_param = self.CGI_dictionary_spoof_function(
     dictToUse=kind)
-    consolOut = sys.stdout
-    seqa.sys.stdout = open(os.devnull,'w') #open("junk.txt","w")   
-    found_in_sequence = seqa.main()
-    sys.stdout = consolOut
+ #   consolOut = sys.stdout
+ #   seqa.sys.stdout = open(os.devnull,'w') #open("junk.txt","w")   
+    printer_instance = seqa.html_printer()
+    found_in_sequence = seqa.main(printer=printer_instance, debug=True)
+ #   sys.stdout = consolOut
     return found_in_sequence
 
   def test_find_roi_in_seq_normal(self):
