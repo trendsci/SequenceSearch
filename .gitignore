@@ -1,0 +1,11 @@
+#Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+seqa_comments.txt
+stderr_seqa_py.txt
+ignore_notes/
+
+#temporary files
+*.swp
