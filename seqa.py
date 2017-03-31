@@ -1,27 +1,20 @@
 #! /home/sershn/anaconda2/bin/python
-#import importfasta
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import cgi
 import sys
-import urllib2
 import re
 import datetime
 from sequtil.sequtil import * #my own package with dependancies for this program
-import signal
+import sequtil.constants as const
 
 def printException(text, target="html"):
   if target == "html":  
-    print "Content-type: text/html\n\n"
+    print const.HTML_HEADER
     print "<br>"
     print text
-
-
-#def sig_hand(signal, frame):
-#  print "all good"
-#  sys.exit(0)
 
 def main(printer, debug=False):
   """Description here"""
@@ -35,9 +28,6 @@ def main(printer, debug=False):
   ##we will save output to a varible and print the final page at once.
   sys.stdout = printer #html_printer(stdout=sys.stdout) #assign new reference
 
-  #enable python web presentation on dreamhost
-  #html_setup = "Content-type: text/html\n\n"
-  #print "Content-type: text/html\n\n"
   #read in the POST or GET parameters passed from the HTML GUI
   try:
     arguments_web = parse_CGI_param()
@@ -46,10 +36,6 @@ def main(printer, debug=False):
   # define variables
   ########################VARIABLE DEFINITIONS###################
   ###############################################################  
-  # expected variables:
-  # roi - residue of interest (string)
-  # roitype - normal string or regex expression ('normal'/'regex')
-  # etc...
     seq_source = str(arguments_web["seqsource"].value)
     dpi_web = int(arguments_web["dpi"].value)
     filetype = arguments_web["filetype"].value
@@ -68,29 +54,13 @@ def main(printer, debug=False):
   ##############################################################
   ##############################################################
   except Exception as e:
-    return "<h3>Error</h3>Error parsing provided parameters from form.<br>Did you leave a field empty or filled the form incorrectly?<br>Try to go back and fix your submission<br><br>Program terminated.<br><br>Traceback:<br>({})".format(e)
+    return const.ERROR_CGI_PARSING.format(e)#"<h3>Error</h3>Error parsing provided parameters from form.<br>Did you leave a field empty or filled the form incorrectly?<br>Try to go back and fix your submission<br><br>Program terminated.<br><br>Traceback:<br>({})".format(e)
   #output the arguments the script received from the web (via POST or GET)
 
   ## Simple HTML openning with head section ##
   ############################################
   ############################################
-  javascript_1 = """
-  <script type="text/javascript">
-    var mytextbox = document.getElementById('mytext');
-    var mydropdown = document.getElementById('dropdown');
-
-    mydropdown.onchange = function(){
-          mytextbox.value = mytextbox.value  + this.value; //to appened
-         //mytextbox.innerHTML = this.value;
-    }
-
-   function showhide(id) {
-    var e = document.getElementById(id);
-    e.style.display = (e.style.display == 'block') ? 'none' : 'block';
- }    
-
-  </script>
-  """  
+  javascript_1 = const.JAVASCRIPT_ALL
   print "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"/css/svg1.css\">{jscript_1}</head>".format(jscript_1=javascript_1)
   print "<body>"
 
@@ -283,14 +253,13 @@ def main(printer, debug=False):
       pass
 
 def run_main(debug=False):
-  html_header = "Content-type: text/html\n\n"
   p = html_printer()
   try:
     content = main(printer=p,debug=debug)
   except Exception as e:
-    content = "Exception occured, critical. Program terminated.<br><br>Traceback:<br>{}".format(e)
+    content = const.ERROR_UNKNOWN.format(e)
   sys.stdout = p.get_original_stdout()
-  print  "{}{}".format(html_header,content)
+  print  "{}{}".format(const.HTML_HEADER,content)
 
 if __name__ == "__main__":
   run_main()
